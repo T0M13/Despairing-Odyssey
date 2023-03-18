@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -15,6 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CapsuleCollider playerCollider;
     [SerializeField] private Animator playerAnim;
     [SerializeField] private Transform playerMeshRoot;
+    [SerializeField] private CinemachineVirtualCamera playerThirdPersonCamera;
+    [SerializeField] private CinemachineVirtualCamera playerRigidbodyCamera;
     [Header("Move Settings")]
     [SerializeField] private PlayerMoveComponent moveBehaviour;
     [SerializeField] private PlayerJumpComponent jumpBehaviour;
@@ -27,6 +30,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpInput;
     [Header("Other Settings")]
     [SerializeField] private bool canUseLogic = true;
+    [SerializeField] private bool isDead = false;
     [Header("Ragdoll Settings")]
     [SerializeField] private bool isRagdoll = false;
     [SerializeField] private bool canRagdoll = true;
@@ -256,10 +260,27 @@ public class PlayerController : MonoBehaviour
 
     private void ToggleRagdoll()
     {
+        
         if (isRagdoll)
             RagdollOff();
         else
             RagdollOn();
+
+        SwitchCameras();
+    }
+
+    private void SwitchCameras()
+    {
+        if (isRagdoll || isDead)
+        {
+            playerThirdPersonCamera.enabled = false;
+            playerRigidbodyCamera.enabled = true;
+        }
+        else
+        {
+            playerThirdPersonCamera.enabled = true;
+            playerRigidbodyCamera.enabled = false;
+        }
     }
 
     private void OnDrawGizmos()
