@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
     {
         Ragdoll();
         if (!canUseLogic) return;
-        Move();
+        Move(); //--> move into fixed and look here
     }
 
     private void FixedUpdate()
@@ -223,7 +223,7 @@ public class PlayerController : MonoBehaviour
         GetRagdollColliders();
     }
 
-    private void RagdollOff()
+    public void RagdollOff()
     {
         foreach (Rigidbody rigidbody in ragdollbodyParts)
         {
@@ -238,10 +238,14 @@ public class PlayerController : MonoBehaviour
         isRagdoll = false;
         canUseLogic = true;
         playerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
+        playerAnim.transform.rotation = new Quaternion(0, 0, 0, 0);
+        playerCollider.enabled = true;
+        playerRigidbody.isKinematic = false;
 
+        SwitchCameras();
     }
 
-    private void RagdollOn()
+    public void RagdollOn()
     {
         foreach (Rigidbody rigidbody in ragdollbodyParts)
         {
@@ -256,17 +260,24 @@ public class PlayerController : MonoBehaviour
         isRagdoll = true;
         canUseLogic = false;
         playerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+        playerCollider.enabled = false;
+        playerRigidbody.isKinematic = true;
+
+        SwitchCameras();
     }
 
-    private void ToggleRagdoll()
+    public void ToggleRagdoll()
     {
         
         if (isRagdoll)
             RagdollOff();
         else
-            RagdollOn();
+            RagdollOn();        
+    }
 
-        SwitchCameras();
+    public void SetDead()
+    {
+        RagdollOn();
     }
 
     private void SwitchCameras()

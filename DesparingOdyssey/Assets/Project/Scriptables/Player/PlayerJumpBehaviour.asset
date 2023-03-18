@@ -19,10 +19,10 @@ MonoBehaviour:
   checkGrounded: 1
   isGrounded: 1
   isFalling: 0
-  groundDetectionRange: 0.1
+  groundDetectionRange: 0.28
   groundDetectionLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   groundDetectionOffset: {x: 0, y: 0.1, z: 0}
   jumpForceMode: 1
   jumpClip: {fileID: 7400000, guid: a20f34c7dcb56524aafb11a2bbc659aa, type: 2}
