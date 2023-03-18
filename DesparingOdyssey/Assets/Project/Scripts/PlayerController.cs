@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody playerRigidbody;
     [SerializeField] private CapsuleCollider playerCollider;
     [SerializeField] private Animator playerAnim;
+    [SerializeField] private Transform playerMeshRoot;
     [Header("Move Settings")]
     [SerializeField] private PlayerMoveComponent moveBehaviour;
     [SerializeField] private PlayerJumpComponent jumpBehaviour;
@@ -24,9 +25,14 @@ public class PlayerController : MonoBehaviour
     [Header("Jump Settings")]
     [SerializeField] private bool canJump = true;
     [SerializeField] private float jumpInput;
-    [SerializeField] private bool isJumping;
     [Header("Other Settings")]
     [SerializeField] private bool canUseLogic = true;
+    [Header("Ragdoll Settings")]
+    [SerializeField] private bool isRagdoll = false;
+    [SerializeField] private bool canRagdoll = true;
+    [SerializeField] private float ragdollInput;
+    [SerializeField] private Rigidbody[] ragdollbodyParts;
+    [SerializeField] private Collider[] ragdollColliders;
     [Header("Animation Settings")]
     private int moveInputY_A;
     private int moveInputX_A;
@@ -46,6 +52,11 @@ public class PlayerController : MonoBehaviour
     public void OnJump(InputValue value)
     {
         jumpInput = value.Get<float>();
+    }
+
+    public void OnRagdoll(InputValue value)
+    {
+        ragdollInput = value.Get<float>();
     }
 
     private void Awake()
@@ -68,6 +79,10 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         SetAnimationHash();
+
+        GetRagdoll();
+        RagdollOff();
+
     }
 
     private void OnValidate()
@@ -79,6 +94,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        Ragdoll();
         if (!canUseLogic) return;
         Move();
     }
@@ -176,6 +192,74 @@ public class PlayerController : MonoBehaviour
             jumpBehaviour.JumpWithAnimation(playerRigidbody, jumpInput, playerAnim);
             jumpInput = 0;
         }
+    }
+
+    private void Ragdoll()
+    {
+        if (canRagdoll && ragdollInput > 0)
+        {
+            ToggleRagdoll();
+            ragdollInput = 0;
+        }
+    }
+
+    private void GetRagdollbodyParts()
+    {
+        ragdollbodyParts = playerMeshRoot.GetComponentsInChildren<Rigidbody>();
+    }
+
+    private void GetRagdollColliders()
+    {
+        ragdollColliders = playerMeshRoot.GetComponentsInChildren<Collider>();
+    }
+
+    private void GetRagdoll()
+    {
+        GetRagdollbodyParts();
+        GetRagdollColliders();
+    }
+
+    private void RagdollOff()
+    {
+        foreach (Rigidbody rigidbody in ragdollbodyParts)
+        {
+            rigidbody.isKinematic = true;
+        }
+        foreach (Collider collider in ragdollColliders)
+        {
+            collider.enabled = false;
+        }
+
+        playerAnim.enabled = true;
+        isRagdoll = false;
+        canUseLogic = true;
+        playerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
+
+    }
+
+    private void RagdollOn()
+    {
+        foreach (Rigidbody rigidbody in ragdollbodyParts)
+        {
+            rigidbody.isKinematic = false;
+        }
+        foreach (Collider collider in ragdollColliders)
+        {
+            collider.enabled = true;
+        }
+
+        playerAnim.enabled = false;
+        isRagdoll = true;
+        canUseLogic = false;
+        playerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+    }
+
+    private void ToggleRagdoll()
+    {
+        if (isRagdoll)
+            RagdollOff();
+        else
+            RagdollOn();
     }
 
     private void OnDrawGizmos()

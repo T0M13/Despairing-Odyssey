@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PlayerJumpBehaviour
   m_EditorClassIdentifier: 
   jumpForce: 6
-  maxJumps: 2
-  jumpsLeft: 2
+  maxJumps: 1
+  jumpsLeft: 1
   isJumping: 0
   checkGrounded: 1
   isGrounded: 1

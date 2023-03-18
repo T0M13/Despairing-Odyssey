@@ -22,9 +22,9 @@ public class PlayerJumpComponent : ScriptableObject, PlayerJumpBehaviour
     [Header("Force Mode")]
     [SerializeField] ForceMode jumpForceMode = ForceMode.Impulse;
     [Header("Animation Settings")]
+    [SerializeField] AnimationClip jumpClip;
     private int jumpInput_A;
     private int fallingInput_A;
-    [SerializeField] AnimationClip jumpClip;
 
     private void Awake()
     {
