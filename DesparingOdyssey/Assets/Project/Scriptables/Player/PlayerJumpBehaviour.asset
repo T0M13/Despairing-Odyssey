@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e8109bfeec72fa4ebd416d783ec8837, type: 3}
+  m_Name: PlayerJumpBehaviour
+  m_EditorClassIdentifier: 
+  jumpForce: 5
+  maxJumps: 1
+  jumpsLeft: 1
+  checkGrounded: 1
+  isGrounded: 1
+  groundDetectionRange: 0.1
+  groundDetectionLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  groundDetectionOffset: {x: 0, y: 0.1, z: 0}
+  jumpForceMode: 1

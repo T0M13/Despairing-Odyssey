@@ -13,13 +13,26 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform followTransform;
     [SerializeField] private Rigidbody playerRigidbody;
     [SerializeField] private CapsuleCollider playerCollider;
+    [SerializeField] private Animator playerAnim;
     [Header("Move Settings")]
     [SerializeField] private PlayerMoveComponent moveBehaviour;
+    [SerializeField] private PlayerJumpComponent jumpBehaviour;
     [SerializeField] private bool canMove = true;
+    [SerializeField] private bool isMoving;
     [SerializeField] private Vector2 moveInput;
     [SerializeField] private Vector2 lookInput;
+    [Header("Jump Settings")]
+    [SerializeField] private bool canJump = true;
+    [SerializeField] private float jumpInput;
+    [SerializeField] private bool isJumping;
     [Header("Other Settings")]
     [SerializeField] private bool canUseLogic = true;
+    [Header("Animation Settings")]
+    private int moveInputY_A;
+    private int moveInputX_A;
+    private int isMoving_A;
+    private int isJumping_A;
+
 
     public void OnMove(InputValue value)
     {
@@ -29,6 +42,11 @@ public class PlayerController : MonoBehaviour
     public void OnLook(InputValue value)
     {
         lookInput = value.Get<Vector2>();
+    }
+
+    public void OnJump(InputValue value)
+    {
+        jumpInput = value.Get<float>();
     }
 
     private void Awake()
@@ -46,18 +64,30 @@ public class PlayerController : MonoBehaviour
         LockHideCursor();
         GetRigidbody();
         GetCapsuleCollider();
+        GetAnimator();
+    }
+    private void Start()
+    {
+        SetAnimationHash();
     }
 
     private void OnValidate()
     {
         GetRigidbody();
         GetCapsuleCollider();
+        GetAnimator();
     }
 
     private void Update()
     {
         if (!canUseLogic) return;
         Move();
+    }
+
+    private void FixedUpdate()
+    {
+        if (!canUseLogic) return;
+        Jump();
     }
 
     /// <summary>
@@ -87,11 +117,27 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
+    /// Gets the Animator Component
+    /// </summary>
+    private void GetAnimator()
+    {
+        playerAnim = transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+    }
+
+    /// <summary>
     /// Gets the CapsuleCollider Component
     /// </summary>
     private void GetCapsuleCollider()
     {
         playerCollider = GetComponent<CapsuleCollider>();
+    }
+
+    private void SetAnimationHash()
+    {
+        moveInputY_A = Animator.StringToHash("moveInputY");
+        moveInputX_A = Animator.StringToHash("moveInputX");
+        isMoving_A = Animator.StringToHash("isMoving");
+        isJumping_A = Animator.StringToHash("isJumping");
     }
 
     /// <summary>
@@ -100,6 +146,56 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         if (canMove)
+        {
             moveBehaviour.Move(transform, followTransform, lookInput, moveInput);
+            if (moveInput.x != 0 || moveInput.y != 0)
+            {
+                isMoving = true;
+            }
+            else
+            {
+                isMoving = false;
+            }
+
+            UpdateMoveAnimation();
+        }
+    }
+
+    private void UpdateMoveAnimation()
+    {
+        playerAnim.SetBool(isMoving_A, isMoving);
+        playerAnim.SetFloat(moveInputX_A, moveInput.x);
+        playerAnim.SetFloat(moveInputY_A, moveInput.y);
+    }
+
+    private void UpdateJumpAnimation()
+    {
+        playerAnim.SetBool(isJumping_A, isJumping);
+    }
+
+    /// <summary>
+    /// Makes Player Jump
+    /// </summary>
+    private void Jump()
+    {
+        if (canJump)
+        {
+            jumpBehaviour.Jump(playerRigidbody, jumpInput);
+            //if(playerRigidbody.velocity.y > 0)
+            //{
+            //    isJumping = true;
+            //}
+            //else
+            //{
+            //    isJumping = false;
+            //}
+            //UpdateJumpAnimation();
+            jumpInput = 0;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        jumpBehaviour.DrawGizmos(playerRigidbody);
     }
 }

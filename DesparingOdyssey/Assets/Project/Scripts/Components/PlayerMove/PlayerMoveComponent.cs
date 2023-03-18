@@ -7,19 +7,18 @@ using UnityEngine.InputSystem;
 public class PlayerMoveComponent : ScriptableObject, PlayerMoveBehaviour
 {
     [Header("Camera Inverting Settings")]
-    public bool invertHorizontalRotation = false;
-    public bool invertVerticalRotation = false;
+    [SerializeField] bool invertHorizontalRotation = false;
+    [SerializeField] bool invertVerticalRotation = false;
 
     [Header("Camera Rotation Settings")]
-    public float rotationPower = 0.2f;
-    public float rotationLerp = 0.5f;
+    [SerializeField] float rotationPower = 0.2f;
+    [SerializeField] float rotationLerp = 0.5f;
 
     [Header("Stats")]
-    public Vector3 nextPosition;
-    public Quaternion nextRotation;
+    [SerializeField] Vector3 nextPosition;
+    [SerializeField] Quaternion nextRotation;
 
     public float moveSpeed = 1f;
-
 
     public void Move(Transform playerTransform, Transform followTransform, Vector2 lookInput, Vector2 moveInput)
     {

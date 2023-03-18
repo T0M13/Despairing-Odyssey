@@ -804,10 +804,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.31529003
-  m_Height: 1.8147883
+  m_Radius: 0.30066848
+  m_Height: 1.75
   m_Direction: 1
-  m_Center: {x: 0.021014094, y: 0.9337714, z: -0.023576051}
+  m_Center: {x: 0.013355851, y: 0.88606024, z: -0.023576051}
 --- !u!54 &1922693737
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -836,8 +836,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdfba827b67514a4586250c0749ee94a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveBehaviour: {fileID: 11400000, guid: 03dc1c8d56394534299b8082ede837aa, type: 2}
   followTransform: {fileID: 1768907379}
+  playerRigidbody: {fileID: 1922693737}
+  playerCollider: {fileID: 1922693736}
+  playerAnim: {fileID: 8988242311104086709}
+  moveBehaviour: {fileID: 11400000, guid: 03dc1c8d56394534299b8082ede837aa, type: 2}
+  jumpBehaviour: {fileID: 11400000, guid: 34fc9c0260b9b9e42b0f3f027b8120aa, type: 2}
+  canMove: 1
+  isMoving: 1
+  moveInput: {x: 0, y: 0}
+  lookInput: {x: 0, y: 0}
+  canJump: 1
+  jumpInput: 0
+  isJumping: 0
+  canUseLogic: 1
 --- !u!114 &1922693739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2887,6 +2899,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8988242311111009363}
   - component: {fileID: 8988242311104086709}
+  - component: {fileID: 8988242311111328222}
   m_Layer: 0
   m_Name: Character_Male_Sorcerer_01
   m_TagString: Untagged
@@ -2894,6 +2907,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!54 &8988242311111328222
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8988242311111328221}
+  serializedVersion: 2
+  m_Mass: 0.0001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 1
 --- !u!1 &8988242311111328469
 GameObject:
   m_ObjectHideFlags: 0
