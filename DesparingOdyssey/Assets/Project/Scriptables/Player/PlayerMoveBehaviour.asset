@@ -16,8 +16,6 @@ MonoBehaviour:
   invertVerticalRotation: 0
   rotationPower: 0.2
   rotationLerp: 0.5
-  nextPosition: {x: 0, y: -0.05877137, z: 0}
-  nextRotation: {x: -0.0064815423, y: 0.9904167, z: -0.049912374, w: -0.12861396}
-  moveSpeed: 1
-  idleAnimation: {fileID: -203655887218126122, guid: ab3a5d6a5ff8d8e4cb849ba9ac09244f, type: 3}
-  moveAnimation: {fileID: -203655887218126122, guid: 9b746fe088acec644aafc01d2df540af, type: 3}
+  nextPosition: {x: 0.7859635, y: -0.011060357, z: -2.122025}
+  nextRotation: {x: -0.095747344, y: 0.4509217, z: -0.048725653, w: -0.8860745}
+  moveSpeed: 3

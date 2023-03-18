@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
     private int moveInputY_A;
     private int moveInputX_A;
     private int isMoving_A;
-    private int isJumping_A;
 
 
     public void OnMove(InputValue value)
@@ -137,7 +136,6 @@ public class PlayerController : MonoBehaviour
         moveInputY_A = Animator.StringToHash("moveInputY");
         moveInputX_A = Animator.StringToHash("moveInputX");
         isMoving_A = Animator.StringToHash("isMoving");
-        isJumping_A = Animator.StringToHash("isJumping");
     }
 
     /// <summary>
@@ -168,11 +166,6 @@ public class PlayerController : MonoBehaviour
         playerAnim.SetFloat(moveInputY_A, moveInput.y);
     }
 
-    private void UpdateJumpAnimation()
-    {
-        playerAnim.SetBool(isJumping_A, isJumping);
-    }
-
     /// <summary>
     /// Makes Player Jump
     /// </summary>
@@ -180,16 +173,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canJump)
         {
-            jumpBehaviour.Jump(playerRigidbody, jumpInput);
-            //if(playerRigidbody.velocity.y > 0)
-            //{
-            //    isJumping = true;
-            //}
-            //else
-            //{
-            //    isJumping = false;
-            //}
-            //UpdateJumpAnimation();
+            jumpBehaviour.JumpWithAnimation(playerRigidbody, jumpInput, playerAnim);
             jumpInput = 0;
         }
     }

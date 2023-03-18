@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8109bfeec72fa4ebd416d783ec8837, type: 3}
   m_Name: PlayerJumpBehaviour
   m_EditorClassIdentifier: 
-  jumpForce: 5
-  maxJumps: 1
-  jumpsLeft: 1
+  jumpForce: 6
+  maxJumps: 2
+  jumpsLeft: 2
+  isJumping: 0
   checkGrounded: 1
   isGrounded: 1
+  isFalling: 0
   groundDetectionRange: 0.1
   groundDetectionLayer:
     serializedVersion: 2
     m_Bits: 64
   groundDetectionOffset: {x: 0, y: 0.1, z: 0}
   jumpForceMode: 1
+  jumpClip: {fileID: 7400000, guid: a20f34c7dcb56524aafb11a2bbc659aa, type: 2}
