@@ -2,8 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spikes : MonoBehaviour
+public class Saw : MonoBehaviour
 {
+    public float sawSpeed = 1000f;
+
+    private void Update()
+    {
+        transform.Rotate(new Vector3(transform.localRotation.x + 1 * sawSpeed * Time.deltaTime, transform.localRotation.y));
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
 
@@ -13,5 +20,4 @@ public class Spikes : MonoBehaviour
             player.SetDead();
         }
     }
-
 }

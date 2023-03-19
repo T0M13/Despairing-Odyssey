@@ -7,6 +7,7 @@ public class SwingBladeTrap : MonoBehaviour
     [Header("SwingBlade Positions")]
     [SerializeField] private Quaternion swingBladeLeft;
     [SerializeField] private Quaternion swingBladeRight;
+    [SerializeField] private AnimationCurve swingCurve;
     [Header("SwingBlade Speed")]
     [SerializeField] private float swingBladeSpeed;
     [Header("Timer")]
@@ -40,7 +41,7 @@ public class SwingBladeTrap : MonoBehaviour
             float t = cooldown / timer;
 
 
-            transform.rotation = Quaternion.Lerp(swingBladeRight, swingBladeLeft, swingBladeSpeed * t);
+            transform.rotation = Quaternion.Slerp(swingBladeRight, swingBladeLeft, swingCurve.Evaluate(swingBladeSpeed * t));
 
             cooldown += Time.deltaTime;
             yield return null;
@@ -58,7 +59,7 @@ public class SwingBladeTrap : MonoBehaviour
             float t = cooldown / timer;
 
 
-            transform.rotation = Quaternion.Lerp(swingBladeLeft, swingBladeRight, swingBladeSpeed * t);
+            transform.rotation = Quaternion.Slerp(swingBladeLeft, swingBladeRight, swingCurve.Evaluate(swingBladeSpeed * t));
 
             cooldown += Time.deltaTime;
             yield return null;
