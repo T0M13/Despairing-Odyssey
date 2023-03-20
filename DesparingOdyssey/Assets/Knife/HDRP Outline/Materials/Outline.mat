@@ -244,7 +244,7 @@ Material:
     - _UVSet: 0
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
-    - _ZTest: 0
+    - _ZTest: 4
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 4
     - _ZTestModeDistortion: 8

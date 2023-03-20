@@ -23,7 +23,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerMAT
+  m_Name: Prototype_512x512_Grey3_TonnMAT
   m_Shader: {fileID: 4800000, guid: 57df2f623bf75924299f63bd6d09fefe, type: 3}
   m_ValidKeywords:
   - _DISABLE_SSR_TRANSPARENT
@@ -44,15 +44,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_40BD0406:
-        m_Texture: {fileID: 2800000, guid: 5dab8b5d7a5db2b4aacf7b82c82b9e31, type: 3}
+        m_Texture: {fileID: 2800000, guid: d9c0dd5cdac07b145be73329e489869a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_AFD13AF9:
-        m_Texture: {fileID: 2800000, guid: 5dab8b5d7a5db2b4aacf7b82c82b9e31, type: 3}
+        m_Texture: {fileID: 2800000, guid: d9c0dd5cdac07b145be73329e489869a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_B1F02F4D:
-        m_Texture: {fileID: 2800000, guid: 5dab8b5d7a5db2b4aacf7b82c82b9e31, type: 3}
+        m_Texture: {fileID: 2800000, guid: d9c0dd5cdac07b145be73329e489869a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture3D_5ED78278:
@@ -158,11 +158,11 @@ Material:
     m_Ints: []
     m_Floats:
     - Vector1_45446F90: 0.9
-    - Vector1_54B89D7E: 0.5
+    - Vector1_54B89D7E: 0.806
     - Vector1_8AFDFB0C: 1
     - Vector1_9FF40171: 1
-    - Vector1_B62F4D58: 0.3
-    - Vector1_BC8BD2CC: 0.26
+    - Vector1_B62F4D58: 0
+    - Vector1_BC8BD2CC: 1
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
