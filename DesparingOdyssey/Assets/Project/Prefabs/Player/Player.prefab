@@ -392,15 +392,15 @@ MonoBehaviour:
   jumpInput: 0
   canUseLogic: 1
   isDead: 0
+  inventoryBehaviour: {fileID: 11400000, guid: 3bb91e182318afb4686ca36405f10844, type: 2}
   visualInventoryHealthPoints:
   - {fileID: 2763241254802209087}
   - {fileID: 1168447687}
   - {fileID: 1523762352}
   visualInventorySaveItems:
-  - {fileID: 4294074804196339125}
-  - {fileID: 3874622780413701638}
   - {fileID: 327736906790099976}
-  inventoryBehaviour: {fileID: 11400000, guid: 3bb91e182318afb4686ca36405f10844, type: 2}
+  - {fileID: 3874622780413701638}
+  - {fileID: 4294074804196339125}
   isRagdoll: 0
   canRagdoll: 1
   ragdollInput: 0
