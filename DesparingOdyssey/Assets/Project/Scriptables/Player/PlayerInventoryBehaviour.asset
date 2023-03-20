@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e843685e175dbfd4ba2c99ec1b7a3215, type: 3}
+  m_Name: PlayerInventoryBehaviour
+  m_EditorClassIdentifier: 
+  inventoryItemSlots: 000000000000000000000000
+  inventorySize: 3
+  inventorySlotsUsed: 0
+  inventoryFull: 0

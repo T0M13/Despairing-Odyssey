@@ -31,6 +31,10 @@ public class PlayerController : MonoBehaviour
     [Header("Other Settings")]
     [SerializeField] private bool canUseLogic = true;
     [SerializeField] private bool isDead = false;
+    [Header("Inventory Settings")]
+    public PlayerInvetoryComponent inventoryBehaviour;
+    [SerializeField] private GameObject[] visualInventoryHealthPoints;
+    [SerializeField] private GameObject[] visualInventorySaveItems;
     [Header("Ragdoll Settings")]
     [SerializeField] private bool isRagdoll = false;
     [SerializeField] private bool canRagdoll = true;
@@ -41,7 +45,6 @@ public class PlayerController : MonoBehaviour
     private int moveInputY_A;
     private int moveInputX_A;
     private int isMoving_A;
-
 
     public void OnMove(InputValue value)
     {
@@ -86,6 +89,8 @@ public class PlayerController : MonoBehaviour
 
         GetRagdoll();
         RagdollOff();
+
+        InitiateInventory();
 
     }
 
@@ -268,11 +273,11 @@ public class PlayerController : MonoBehaviour
 
     public void ToggleRagdoll()
     {
-        
+
         if (isRagdoll)
             RagdollOff();
         else
-            RagdollOn();        
+            RagdollOn();
     }
 
     public void SetDead()
@@ -294,8 +299,47 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    public void UpdateInventory()
+    {
+        for (int i = 0; i < inventoryBehaviour.inventoryItemSlots.Length; i++)
+        {
+            switch (inventoryBehaviour.inventoryItemSlots[i])
+            {
+                case InventoryItemType.None:
+                    visualInventoryHealthPoints[i].SetActive(false);
+                    visualInventorySaveItems[i].SetActive(false);
+                    break;
+                case InventoryItemType.HealthPoint:
+                    visualInventoryHealthPoints[i].SetActive(true);
+                    visualInventorySaveItems[i].SetActive(false);
+                    break;
+                case InventoryItemType.SaveItem:
+                    visualInventoryHealthPoints[i].SetActive(false);
+                    visualInventorySaveItems[i].SetActive(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    public void InitiateInventory()
+    {
+        inventoryBehaviour.InitiateInventory();
+        UpdateInventory();
+    }
+
+    public void ResetInventory()
+    {
+        inventoryBehaviour.RemoveAll();
+        UpdateInventory();
+    }
+
     private void OnDrawGizmos()
     {
         jumpBehaviour.DrawGizmos(playerRigidbody);
     }
+
 }
