@@ -17,10 +17,10 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   width:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 4
   fillAmount:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   patternTexture:
     m_OverrideState: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: {x: 1.2, y: 0.675}
   iterations:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   blurRadius:
     m_OverrideState: 1
@@ -51,7 +51,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   singlePassInstanced:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
 --- !u!114 &11400000
 MonoBehaviour:
