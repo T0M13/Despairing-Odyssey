@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e843685e175dbfd4ba2c99ec1b7a3215, type: 3}
   m_Name: PlayerInventoryBehaviour
   m_EditorClassIdentifier: 
-  inventoryItemSlots: 000000000000000000000000
+  inventoryItemSlots: 020000000100000002000000
   inventorySize: 3
-  inventorySlotsUsed: 0
-  inventoryFull: 0
+  inventorySlotsUsed: 3
+  inventoryFull: 1

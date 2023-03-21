@@ -53,9 +53,17 @@ MonoBehaviour:
   masterGroup: {fileID: 24300002, guid: e51e6f84945a2f848b0eab571f528298, type: 2}
   musicGroup: {fileID: -76637508257392862, guid: e51e6f84945a2f848b0eab571f528298, type: 2}
   effectsGroup: {fileID: 4707923197465392448, guid: e51e6f84945a2f848b0eab571f528298, type: 2}
-  sounds: []
-  saveAudioBehaviour: {fileID: 11400000, guid: 7d540fe1c4837bb47acdf967c3e0d43d, type: 2}
-  loadAudioBehaviour: {fileID: 11400000, guid: 45621d75139ddc14ea3a15d565f078f8, type: 2}
+  sounds:
+  - name: saw
+    clip: {fileID: 8300000, guid: e16d1eefa32e6d847a416584a3feb493, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 1
+    spatialBand: 1
+    type: 2
+    source: {fileID: 0}
+  saveBehaviour: {fileID: 11400000, guid: 7d540fe1c4837bb47acdf967c3e0d43d, type: 2}
+  loadBehaviour: {fileID: 11400000, guid: 45621d75139ddc14ea3a15d565f078f8, type: 2}
 --- !u!82 &5607157440213826452
 AudioSource:
   m_ObjectHideFlags: 0

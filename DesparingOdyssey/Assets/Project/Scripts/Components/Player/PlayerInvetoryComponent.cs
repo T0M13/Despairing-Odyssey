@@ -61,9 +61,8 @@ public class PlayerInvetoryComponent : ScriptableObject
             inventoryItemSlots[i] = InventoryItemType.None;
         }
 
-        if (inventorySlotsUsed < inventorySize)
-            inventoryFull = false;
         inventorySlotsUsed = 0;
+        inventoryFull = false;
     }
 
 
