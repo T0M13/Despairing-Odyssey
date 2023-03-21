@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool timerIsRunning = false;
     [SerializeField] private bool isGameOver = false;
     [SerializeField] private int deaths = 0;
+    [SerializeField] private Vector3 gravityScale = new Vector3(0,-9.81f,0);
 
 
     private void Awake()
@@ -28,6 +29,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    private void OnValidate()
+    {
+        SetGravity();
+    }
+
+    public void SetGravity()
+    {
+        Physics.gravity = gravityScale;
+    }
     private void Start()
     {
         StartTimer();

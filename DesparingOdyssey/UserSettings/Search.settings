@@ -7,9 +7,15 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
+<<<<<<< Updated upstream
 	"last_search.2138236A" = ""
 	"OpenInspectorPreview.2138236A" = "0"
 	"currentGroup.2138236A" = "asset"
+=======
+	"last_search.DA949528" = ""
+	"OpenInspectorPreview.DA949528" = "0"
+	"currentGroup.DA949528" = "all"
+>>>>>>> Stashed changes
 }
 providers = {
 	adb = {
