@@ -26,6 +26,8 @@ public class PlayerJumpComponent : ScriptableObject, PlayerJumpBehaviour
     private int jumpInput_A;
     private int fallingInput_A;
 
+    public bool IsGrounded { get => isGrounded; set => isGrounded = value; }
+
     private void Awake()
     {
         jumpInput_A = Animator.StringToHash("isJumping");
@@ -35,7 +37,7 @@ public class PlayerJumpComponent : ScriptableObject, PlayerJumpBehaviour
     {
         if (checkGrounded)
         {
-            if (IsGrounded(rb) && rb.velocity.y <= 0)
+            if (IsPlayerGrounded(rb) && rb.velocity.y <= 0)
             {
                 ResetJumps();
             }
@@ -52,7 +54,7 @@ public class PlayerJumpComponent : ScriptableObject, PlayerJumpBehaviour
     {
         if (checkGrounded)
         {
-            if (IsGrounded(rb) && rb.velocity.y <= 0)
+            if (IsPlayerGrounded(rb) && rb.velocity.y <= 0)
             {
                 isFalling = false;
                 isJumping = false;
@@ -60,7 +62,7 @@ public class PlayerJumpComponent : ScriptableObject, PlayerJumpBehaviour
                 anim.SetBool(jumpInput_A, isJumping);
                 anim.SetBool(fallingInput_A, isFalling);
             }
-            if (!IsGrounded(rb) && rb.velocity.y < 0)
+            if (!IsPlayerGrounded(rb) && rb.velocity.y < 0)
             {
                 isFalling = true;
                 isJumping = false;
@@ -82,13 +84,13 @@ public class PlayerJumpComponent : ScriptableObject, PlayerJumpBehaviour
         }
     }
 
-    private bool IsGrounded(Rigidbody rb)
+    private bool IsPlayerGrounded(Rigidbody rb)
     {
         if (Physics.Raycast(rb.transform.position + groundDetectionOffset, Vector2.down * groundDetectionRange, out rayHit, groundDetectionRange, groundDetectionLayer))
-            isGrounded = true;
-        else isGrounded = false;
+            IsGrounded = true;
+        else IsGrounded = false;
 
-        return isGrounded;
+        return IsGrounded;
     }
 
     private void ResetJumps()

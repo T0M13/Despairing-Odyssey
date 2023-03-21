@@ -328,7 +328,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            //Game Over --> Return to Beginning
+            if (GameManager.instance == null) return;
+            GameManager.instance.GameOver();
         }
     }
 
@@ -446,7 +447,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateLastPosition()
     {
-        if (isDead) return;
+        if (isDead || !jumpBehaviour.IsGrounded) return;
         lastPositionTimer -= Time.deltaTime;
         if (lastPositionTimer <= 0)
         {
