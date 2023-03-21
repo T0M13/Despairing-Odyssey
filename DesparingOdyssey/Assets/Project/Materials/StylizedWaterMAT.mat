@@ -77,12 +77,12 @@ Material:
     - _EnableFogOnTransparent: 1
     - _FoamAmount: 3
     - _FoamCutOff: 1
-    - _FoamScale: 2
-    - _FoamSpeed: 1
+    - _FoamScale: 30
+    - _FoamSpeed: 0.1
     - _OpaqueCullMode: 2
-    - _RefractionScale: 1
+    - _RefractionScale: 1.5
     - _RefractionSpeed: 0.5
-    - _RefractionStrength: 0.3
+    - _RefractionStrength: 1
     - _RenderQueueType: 4
     - _SrcBlend: 1
     - _StencilRef: 0
@@ -110,9 +110,9 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - _DeepWater: {r: 0.09411763, g: 0.5069278, b: 0.8117647, a: 0.19607843}
+    - _DeepWater: {r: 0.34509805, g: 0.62352943, b: 1, a: 0.19607843}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 0.5529412}
-    - _ShallowWater: {r: 0.38039207, g: 0.8799576, b: 1, a: 0.078431375}
+    - _ShallowWater: {r: 0.5058824, g: 1, b: 0.98039216, a: 0.078431375}
   m_BuildTextureStacks: []

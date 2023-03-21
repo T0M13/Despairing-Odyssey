@@ -317,7 +317,7 @@ public class PlayerController : MonoBehaviour
     public void SetDead()
     {
         isDead = true;
-        RagdollOn();
+            RagdollOn();
         if (HasHealthPoints())
         {
             StartCoroutine(ReviveWithTime(InventoryItemType.HealthPoint, 1, lastPosition, true));

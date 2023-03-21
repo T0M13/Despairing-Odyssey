@@ -12,4 +12,13 @@ public class TrapKill : MonoBehaviour
             player.SetDead();
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<PlayerController>())
+        {
+            PlayerController player = other.gameObject.GetComponent<PlayerController>();
+            player.SetDead();
+        }
+    }
 }
