@@ -12,7 +12,7 @@ public class SaveCheckpoint : MonoBehaviour
         if (other.GetComponent<PlayerController>())
         {
             PlayerController player = other.GetComponent<PlayerController>();
-            if (player.inventoryBehaviour.inventoryItemSlots.Contains(InventoryItemType.SaveItem))
+            if (player.inventoryBehaviour.inventoryItemSlots.Contains(InventoryItemType.SaveItem) && !player.SavedPositionSaved)
             {
                 player.SavedPosition = new Vector3(transform.position.x, spawnPoint.position.y, transform.position.z);
                 player.SavedPositionSaved = true;
