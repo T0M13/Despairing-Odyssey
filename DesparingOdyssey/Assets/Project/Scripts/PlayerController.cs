@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     [Header("Other Settings")]
     [SerializeField] private bool canUseLogic = true;
     [SerializeField] private bool isDead = false;
+    [SerializeField] private Vector3 startPosition;
     [SerializeField] private Vector3 savedPosition;
     [SerializeField] private bool savedPositionSaved = false;
     [SerializeField] private Vector3 lastPosition;
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float lastPositionTimer = 3f;
     [SerializeField] private float reviveTime = 2f;
     [SerializeField] private float despawnRagdollCloneTime = 15f;
+    [SerializeField] private float restartInput;
     [Header("Inventory Settings")]
     public PlayerInvetoryComponent inventoryBehaviour;
     [SerializeField] private GameObject[] visualInventoryHealthPoints;
@@ -76,6 +78,11 @@ public class PlayerController : MonoBehaviour
     public void OnRagdoll(InputValue value)
     {
         ragdollInput = value.Get<float>();
+    }
+
+    public void OnRestart(InputValue value)
+    {
+        restartInput = value.Get<float>();
     }
 
     private void Awake()
@@ -119,6 +126,7 @@ public class PlayerController : MonoBehaviour
     {
         UpdateLastPosition();
         Ragdoll();
+        Restart();
         if (!canUseLogic) return;
         Move(); //--> move into fixed and look here
     }
@@ -227,6 +235,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Restart()
+    {
+        if (restartInput > 0)
+        {
+            ReviveWithPosition(startPosition, false);
+            restartInput = 0;
+        }
+    }
+
     private void GetRagdollbodyParts()
     {
         ragdollbodyParts = playerMeshRoot.GetComponentsInChildren<Rigidbody>();
@@ -315,13 +332,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public IEnumerator ReviveWithTime(InventoryItemType itemType, int amount, Vector3 position, bool withItem)
+    public IEnumerator ReviveWithTime(InventoryItemType itemType, int amount, Vector3 position, bool withHealthItem)
     {
         yield return new WaitForSeconds(reviveTime);
-        if (withItem)
+        if (withHealthItem)
             ReviveWithItem(itemType, amount, position);
         else
-            ReviveWithPosition(position);
+            ReviveWithPosition(position, true);
     }
 
     public void Revive()
@@ -330,14 +347,15 @@ public class PlayerController : MonoBehaviour
         isDead = false;
     }
 
-    public void ReviveWithPosition(Vector3 position)
+    public void ReviveWithPosition(Vector3 position, bool useSaveItem)
     {
         SpawnRagdollClone();
         UpdateInventory();
         RagdollOff();
         isDead = false;
-        savedPositionSaved = false;
         transform.position = position;
+        if (useSaveItem)
+            savedPositionSaved = false;
     }
 
     public void ReviveWithItem(InventoryItemType itemType, int amount, Vector3 position)
