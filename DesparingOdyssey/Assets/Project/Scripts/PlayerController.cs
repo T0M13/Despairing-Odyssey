@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     [Header("Other Settings")]
     [SerializeField] private bool canUseLogic = true;
     [SerializeField] private bool isDead = false;
+    [SerializeField] private Vector3 savedPosition;
     [SerializeField] private Vector3 lastPosition;
     [SerializeField] private float lastPositionUpdateTime = 3f;
     [SerializeField] private float lastPositionTimer = 3f;

@@ -16,6 +16,6 @@ MonoBehaviour:
   invertVerticalRotation: 0
   rotationPower: 0.2
   rotationLerp: 0.5
-  nextPosition: {x: -0.9972302, y: -0.22906017, z: -5.2117934}
-  nextRotation: {x: -0.1734019, y: 0.052444622, z: 0.009247407, w: 0.98341036}
-  moveSpeed: 3
+  nextPosition: {x: -0.8024056, y: -0.22906017, z: -1.9201999}
+  nextRotation: {x: 0.05566514, y: 0.79324186, z: -0.07336055, w: 0.60190284}
+  moveSpeed: 4

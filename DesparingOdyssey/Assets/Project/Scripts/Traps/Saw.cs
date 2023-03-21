@@ -8,7 +8,7 @@ public class Saw : MonoBehaviour
 
     private void Update()
     {
-        transform.Rotate(new Vector3(transform.localRotation.x + 1 * sawSpeed * Time.deltaTime, transform.localRotation.y));
+        transform.Rotate(new Vector3(transform.localRotation.x + 1 * sawSpeed * Time.deltaTime, transform.localRotation.y, 0));
     }
 
     private void OnCollisionEnter(Collision collision)

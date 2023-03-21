@@ -27,15 +27,13 @@ public class SawRailTrap : MonoBehaviour
     {
         sawRailCollider = GetComponent<Collider>();
 
-        sawRailLeftLimitTransform.position = new Vector3(0,0, sawRailCollider.bounds.min.z + offset.z);
-        sawRailRightLimitTransform.position = new Vector3(0,0, sawRailCollider.bounds.max.z + -offset.z);
-
-        GameObject sawClone = Instantiate(sawPrefab, sawRailLeftLimitTransform.position, Quaternion.identity);
+        GameObject sawClone = Instantiate(sawPrefab, transform.position, transform.rotation);
         sawClone.GetComponent<Saw>().sawSpeed = sawSpeed;
         saw = sawClone;
 
         StartCoroutine(InitiateSawRail());
     }
+
 
     private IEnumerator InitiateSawRail()
     {
@@ -55,7 +53,6 @@ public class SawRailTrap : MonoBehaviour
         while (cooldown < timer)
         {
             float t = cooldown / timer;
-
 
             saw.transform.position = Vector3.Lerp(sawRailRightLimitTransform.position, sawRailLeftLimitTransform.position, railCurve.Evaluate(sawRailSpeed * t));
 
