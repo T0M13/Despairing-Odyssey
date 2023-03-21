@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool canUseLogic = true;
     [SerializeField] private bool isDead = false;
     [SerializeField] private Vector3 savedPosition;
+    [SerializeField] private bool savedPositionSaved = false;
     [SerializeField] private Vector3 lastPosition;
     [SerializeField] private float lastPositionUpdateTime = 3f;
     [SerializeField] private float lastPositionTimer = 3f;
@@ -53,6 +54,9 @@ public class PlayerController : MonoBehaviour
     private int moveInputY_A;
     private int moveInputX_A;
     private int isMoving_A;
+
+    public Vector3 SavedPosition { get => savedPosition; set => savedPosition = value; }
+    public bool SavedPositionSaved { get => savedPositionSaved; set => savedPositionSaved = value; }
 
     public void OnMove(InputValue value)
     {
@@ -299,32 +303,51 @@ public class PlayerController : MonoBehaviour
         RagdollOn();
         if (HasHealthPoints())
         {
-            StartCoroutine(ReviveWithTime());
+            StartCoroutine(ReviveWithTime(InventoryItemType.HealthPoint, 1, lastPosition, true));
+        }
+        else if (savedPositionSaved)
+        {
+            StartCoroutine(ReviveWithTime(InventoryItemType.SaveItem, 1, savedPosition, false));
+        }
+        else
+        {
+            //Game Over --> Return to Beginning
         }
     }
 
-    public IEnumerator ReviveWithTime()
+    public IEnumerator ReviveWithTime(InventoryItemType itemType, int amount, Vector3 position, bool withItem)
     {
         yield return new WaitForSeconds(reviveTime);
-        ReviveWithItem(InventoryItemType.HealthPoint, 1);
+        if (withItem)
+            ReviveWithItem(itemType, amount, position);
+        else
+            ReviveWithPosition(position);
     }
 
     public void Revive()
     {
         RagdollOff();
         isDead = false;
-        transform.position = lastPosition;
     }
 
-    public void ReviveWithItem(InventoryItemType itemType, int amount)
+    public void ReviveWithPosition(Vector3 position)
     {
         SpawnRagdollClone();
-        //Effects n idk
+        UpdateInventory();
+        RagdollOff();
+        isDead = false;
+        savedPositionSaved = false;
+        transform.position = position;
+    }
+
+    public void ReviveWithItem(InventoryItemType itemType, int amount, Vector3 position)
+    {
+        SpawnRagdollClone();
         inventoryBehaviour.RemoveItem(itemType, amount);
         UpdateInventory();
         RagdollOff();
         isDead = false;
-        transform.position = lastPosition;
+        transform.position = position;
     }
 
     public void SpawnRagdollClone()
