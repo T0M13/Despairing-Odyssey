@@ -206,35 +206,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemHealthPoint (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 8244265296189767380, guid: 351b3fcb492acc044b4e1f7c255c8ca5, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 07b8c7117e4c8c740bf3bfd0cbf26174, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 351b3fcb492acc044b4e1f7c255c8ca5, type: 3}
---- !u!1 &596880385 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8244265296187998280, guid: 351b3fcb492acc044b4e1f7c255c8ca5, type: 3}
-  m_PrefabInstance: {fileID: 596880384}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &596880386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 596880385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a34dce33c4213c4393266fbcd799d5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 6e4f26dca34a46d4792b902fc997e631, type: 2}
-  color: {r: 1, g: 0.79245317, b: 0.43921566, a: 1}
-  mask: {fileID: 0}
-  fresnelScale: 2
-  fresnelPower: 2
-  alphaThreshold: 0.5
 --- !u!114 &684422630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1056,10 +1029,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 284576654095772386, guid: 4b5861b506bffd345b86a36f0016efb3, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 07b8c7117e4c8c740bf3bfd0cbf26174, type: 2}
     - target: {fileID: 284576655401495975, guid: 4b5861b506bffd345b86a36f0016efb3, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -1110,29 +1079,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b5861b506bffd345b86a36f0016efb3, type: 3}
---- !u!1 &1730395183 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 284576654095772388, guid: 4b5861b506bffd345b86a36f0016efb3, type: 3}
-  m_PrefabInstance: {fileID: 1730395182}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1730395184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1730395183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a34dce33c4213c4393266fbcd799d5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 6e4f26dca34a46d4792b902fc997e631, type: 2}
-  color: {r: 1, g: 0.43921566, b: 0.88075656, a: 1}
-  mask: {fileID: 0}
-  fresnelScale: 2
-  fresnelPower: 2
-  alphaThreshold: 0.5
 --- !u!4 &1768907379 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 508727857633992520, guid: c5f4dadebe2047e449b08354d68f8145, type: 3}
@@ -1481,29 +1427,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79aede4a4c9e66943a777dc8adfc41fd, type: 3}
---- !u!1 &2248275712806229171 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8244265296187998280, guid: 351b3fcb492acc044b4e1f7c255c8ca5, type: 3}
-  m_PrefabInstance: {fileID: 7879884560164050171}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2248275712806229172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2248275712806229171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a34dce33c4213c4393266fbcd799d5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 6e4f26dca34a46d4792b902fc997e631, type: 2}
-  color: {r: 1, g: 0.79245317, b: 0.43921566, a: 1}
-  mask: {fileID: 0}
-  fresnelScale: 2
-  fresnelPower: 2
-  alphaThreshold: 0.5
 --- !u!1001 &2526242678366709680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1799,10 +1722,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemHealthPoint
       objectReference: {fileID: 0}
-    - target: {fileID: 8244265296189767380, guid: 351b3fcb492acc044b4e1f7c255c8ca5, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 07b8c7117e4c8c740bf3bfd0cbf26174, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 351b3fcb492acc044b4e1f7c255c8ca5, type: 3}
 --- !u!4 &8988242311111062805 stripped
