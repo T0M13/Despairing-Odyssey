@@ -59,6 +59,8 @@ public class PlayerController : MonoBehaviour
 
     public Vector3 SavedPosition { get => savedPosition; set => savedPosition = value; }
     public bool SavedPositionSaved { get => savedPositionSaved; set => savedPositionSaved = value; }
+    public bool IsDead { get => isDead; set => isDead = value; }
+    public bool IsRagdoll { get => isRagdoll; set => isRagdoll = value; }
 
     public void OnMove(InputValue value)
     {
@@ -273,7 +275,7 @@ public class PlayerController : MonoBehaviour
         }
 
         playerAnim.enabled = true;
-        isRagdoll = false;
+        IsRagdoll = false;
         canUseLogic = true;
         playerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
         playerAnim.transform.rotation = new Quaternion(0, 0, 0, 0);
@@ -296,7 +298,7 @@ public class PlayerController : MonoBehaviour
         }
 
         playerAnim.enabled = false;
-        isRagdoll = true;
+        IsRagdoll = true;
         canUseLogic = false;
         playerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         playerCollider.enabled = false;
@@ -308,7 +310,7 @@ public class PlayerController : MonoBehaviour
     public void ToggleRagdoll()
     {
 
-        if (isRagdoll)
+        if (IsRagdoll)
             RagdollOff();
         else
             RagdollOn();
@@ -316,7 +318,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetDead()
     {
-        isDead = true;
+        IsDead = true;
             RagdollOn();
         if (HasHealthPoints())
         {
@@ -345,7 +347,7 @@ public class PlayerController : MonoBehaviour
     public void Revive()
     {
         RagdollOff();
-        isDead = false;
+        IsDead = false;
     }
 
     public void ReviveWithPosition(Vector3 position, bool useSaveItem)
@@ -353,7 +355,7 @@ public class PlayerController : MonoBehaviour
         SpawnRagdollClone();
         UpdateInventory();
         RagdollOff();
-        isDead = false;
+        IsDead = false;
         transform.position = position;
         if (useSaveItem)
             savedPositionSaved = false;
@@ -365,7 +367,7 @@ public class PlayerController : MonoBehaviour
         inventoryBehaviour.RemoveItem(itemType, amount);
         UpdateInventory();
         RagdollOff();
-        isDead = false;
+        IsDead = false;
         transform.position = position;
     }
 
@@ -383,7 +385,7 @@ public class PlayerController : MonoBehaviour
 
     private void SwitchCameras()
     {
-        if (isRagdoll || (isRagdoll && isDead))
+        if (IsRagdoll || (IsRagdoll && IsDead))
         {
             playerThirdPersonCamera.enabled = false;
             playerRigidbodyCamera.enabled = true;
@@ -447,7 +449,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateLastPosition()
     {
-        if (isDead || !jumpBehaviour.IsGrounded) return;
+        if (IsDead || !jumpBehaviour.IsGrounded) return;
         lastPositionTimer -= Time.deltaTime;
         if (lastPositionTimer <= 0)
         {
