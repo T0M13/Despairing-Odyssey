@@ -866,29 +866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1330177002 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 284576654095772388, guid: 4b5861b506bffd345b86a36f0016efb3, type: 3}
-  m_PrefabInstance: {fileID: 284576655089305870}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1330177006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330177002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a34dce33c4213c4393266fbcd799d5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 6e4f26dca34a46d4792b902fc997e631, type: 2}
-  color: {r: 1, g: 0.43921566, b: 0.88075656, a: 1}
-  mask: {fileID: 0}
-  fresnelScale: 2
-  fresnelPower: 2
-  alphaThreshold: 0.5
 --- !u!114 &1372660887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1324,10 +1301,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 284576654095772386, guid: 4b5861b506bffd345b86a36f0016efb3, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 07b8c7117e4c8c740bf3bfd0cbf26174, type: 2}
     - target: {fileID: 284576655401495975, guid: 4b5861b506bffd345b86a36f0016efb3, type: 3}
       propertyPath: m_RootOrder
       value: 13

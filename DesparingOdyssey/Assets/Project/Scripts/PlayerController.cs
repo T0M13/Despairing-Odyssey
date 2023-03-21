@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using System.Linq;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CapsuleCollider playerCollider;
     [SerializeField] private Animator playerAnim;
     [SerializeField] private Transform playerMeshRoot;
+    [SerializeField] private SkinnedMeshRenderer playerMesh;
     [SerializeField] private CinemachineVirtualCamera playerThirdPersonCamera;
     [SerializeField] private CinemachineVirtualCamera playerRigidbodyCamera;
     [Header("Move Settings")]
@@ -31,6 +33,11 @@ public class PlayerController : MonoBehaviour
     [Header("Other Settings")]
     [SerializeField] private bool canUseLogic = true;
     [SerializeField] private bool isDead = false;
+    [SerializeField] private Vector3 lastPosition;
+    [SerializeField] private float lastPositionUpdateTime = 3f;
+    [SerializeField] private float lastPositionTimer = 3f;
+    [SerializeField] private float reviveTime = 2f;
+    [SerializeField] private float despawnRagdollCloneTime = 15f;
     [Header("Inventory Settings")]
     public PlayerInvetoryComponent inventoryBehaviour;
     [SerializeField] private GameObject[] visualInventoryHealthPoints;
@@ -90,6 +97,8 @@ public class PlayerController : MonoBehaviour
         GetRagdoll();
         RagdollOff();
 
+        UpdateLastPosition();
+
         InitiateInventory();
 
     }
@@ -103,6 +112,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        UpdateLastPosition();
         Ragdoll();
         if (!canUseLogic) return;
         Move(); //--> move into fixed and look here
@@ -205,7 +215,7 @@ public class PlayerController : MonoBehaviour
 
     private void Ragdoll()
     {
-        if (canRagdoll && ragdollInput > 0)
+        if (ragdollInput > 0)
         {
             ToggleRagdoll();
             ragdollInput = 0;
@@ -230,6 +240,7 @@ public class PlayerController : MonoBehaviour
 
     public void RagdollOff()
     {
+        if (!canRagdoll) return;
         foreach (Rigidbody rigidbody in ragdollbodyParts)
         {
             rigidbody.isKinematic = true;
@@ -252,6 +263,7 @@ public class PlayerController : MonoBehaviour
 
     public void RagdollOn()
     {
+        if (!canRagdoll) return;
         foreach (Rigidbody rigidbody in ragdollbodyParts)
         {
             rigidbody.isKinematic = false;
@@ -282,12 +294,53 @@ public class PlayerController : MonoBehaviour
 
     public void SetDead()
     {
+        isDead = true;
         RagdollOn();
+        if (HasHealthPoints())
+        {
+            StartCoroutine(ReviveWithTime());
+        }
+    }
+
+    public IEnumerator ReviveWithTime()
+    {
+        yield return new WaitForSeconds(reviveTime);
+        ReviveWithItem(InventoryItemType.HealthPoint, 1);
+    }
+
+    public void Revive()
+    {
+        RagdollOff();
+        isDead = false;
+        transform.position = lastPosition;
+    }
+
+    public void ReviveWithItem(InventoryItemType itemType, int amount)
+    {
+        SpawnRagdollClone();
+        //Effects n idk
+        inventoryBehaviour.RemoveItem(itemType, amount);
+        UpdateInventory();
+        RagdollOff();
+        isDead = false;
+        transform.position = lastPosition;
+    }
+
+    public void SpawnRagdollClone()
+    {
+        GameObject ragdollClone = Instantiate(playerAnim.gameObject, playerAnim.transform.position, playerAnim.transform.rotation);
+        StartCoroutine(DespawnRagdollClone(ragdollClone));
+    }
+
+    private IEnumerator DespawnRagdollClone(GameObject ragdollClone)
+    {
+        yield return new WaitForSeconds(despawnRagdollCloneTime);
+        Destroy(ragdollClone);
     }
 
     private void SwitchCameras()
     {
-        if (isRagdoll || isDead)
+        if (isRagdoll || (isRagdoll && isDead))
         {
             playerThirdPersonCamera.enabled = false;
             playerRigidbodyCamera.enabled = true;
@@ -296,6 +349,18 @@ public class PlayerController : MonoBehaviour
         {
             playerThirdPersonCamera.enabled = true;
             playerRigidbodyCamera.enabled = false;
+        }
+    }
+
+    private bool HasHealthPoints()
+    {
+        if (inventoryBehaviour.inventoryItemSlots.Contains(InventoryItemType.HealthPoint))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
@@ -335,6 +400,17 @@ public class PlayerController : MonoBehaviour
     {
         inventoryBehaviour.RemoveAll();
         UpdateInventory();
+    }
+
+    private void UpdateLastPosition()
+    {
+        if (isDead) return;
+        lastPositionTimer -= Time.deltaTime;
+        if (lastPositionTimer <= 0)
+        {
+            lastPositionTimer = lastPositionUpdateTime;
+            lastPosition = transform.position;
+        }
     }
 
     private void OnDrawGizmos()

@@ -380,6 +380,7 @@ MonoBehaviour:
   playerCollider: {fileID: 508727857781409619}
   playerAnim: {fileID: 8913744651120230286}
   playerMeshRoot: {fileID: 8913744651112466478}
+  playerMesh: {fileID: 8913744651124229470}
   playerThirdPersonCamera: {fileID: 0}
   playerRigidbodyCamera: {fileID: 0}
   moveBehaviour: {fileID: 11400000, guid: 03dc1c8d56394534299b8082ede837aa, type: 2}
@@ -392,6 +393,11 @@ MonoBehaviour:
   jumpInput: 0
   canUseLogic: 1
   isDead: 0
+  lastPosition: {x: 0, y: 0, z: 0}
+  lastPositionUpdateTime: 3
+  lastPositionTimer: 3
+  reviveTime: 2
+  despawnRagdollCloneTime: 15
   inventoryBehaviour: {fileID: 11400000, guid: 3bb91e182318afb4686ca36405f10844, type: 2}
   visualInventoryHealthPoints:
   - {fileID: 2763241254802209087}

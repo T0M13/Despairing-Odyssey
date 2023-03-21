@@ -30,26 +30,29 @@ public class PlayerInvetoryComponent : ScriptableObject
                     inventorySlotsUsed++;
                     if (inventorySlotsUsed >= inventorySize)
                         inventoryFull = true;
-                    return;
+                    break;
                 }
             }
         }
     }
 
-    //public void RemoveItem(InventoryItemType inventoryItem, int amount)
-    //{
-    //    for (int j = 0; j < amount; j++)
-    //    {
-    //        for (int i = 0; i < inventorySize; i++)
-    //        {
-    //            if (inventoryItemSlots[i] == inventoryItem)
-    //            {
-    //                inventoryItemSlots[i] = InventoryItemType.None;
-    //                inventoryFull = false;
-    //            }
-    //        }
-    //    }
-    //}
+    public void RemoveItem(InventoryItemType inventoryItem, int amount)
+    {
+        for (int j = 0; j < amount; j++)
+        {
+            for (int i = 0; i < inventorySize; i++)
+            {
+                if (inventoryItemSlots[i] == inventoryItem)
+                {
+                    inventoryItemSlots[i] = InventoryItemType.None;
+                    inventorySlotsUsed--;
+                    if (inventorySlotsUsed < inventorySize)
+                        inventoryFull = false;
+                    break;
+                }
+            }
+        }
+    }
 
     public void RemoveAll()
     {
@@ -58,7 +61,8 @@ public class PlayerInvetoryComponent : ScriptableObject
             inventoryItemSlots[i] = InventoryItemType.None;
         }
 
-        inventoryFull = false;
+        if (inventorySlotsUsed < inventorySize)
+            inventoryFull = false;
         inventorySlotsUsed = 0;
     }
 

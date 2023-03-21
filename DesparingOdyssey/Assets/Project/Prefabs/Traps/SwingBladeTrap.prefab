@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2099869213981630373}
   - component: {fileID: 2099869213981630298}
   - component: {fileID: 2099869213981630372}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SwingBladeTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 6560313304748505862}
   - component: {fileID: 6623846471808387498}
   - component: {fileID: 63195747}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Trap_Swing_Blade_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
