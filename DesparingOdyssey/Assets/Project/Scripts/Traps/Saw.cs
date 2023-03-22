@@ -8,7 +8,8 @@ public class Saw : MonoBehaviour
 
     private void Start()
     {
-        AudioManager.instance.PlayOnObject("saw", gameObject);
+        if (AudioManager.instance)
+            AudioManager.instance.PlayOnObject("saw", gameObject);
     }
 
     private void Update()

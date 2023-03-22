@@ -67,6 +67,13 @@ public class PlayerMoveComponent : ScriptableObject, PlayerMoveBehaviour
 
         nextRotation = Quaternion.Lerp(followTransform.transform.rotation, nextRotation, Time.deltaTime * rotationLerp);
 
+        //Set the player rotation based on the look transform
+        playerTransform.rotation = Quaternion.Euler(0, followTransform.transform.rotation.eulerAngles.y, 0);
+
+        //reset the y rotation of the look transform
+        followTransform.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
+
+
         if (moveInput.x == 0 && moveInput.y == 0)
         {
             nextPosition = playerTransform.position;
@@ -76,13 +83,9 @@ public class PlayerMoveComponent : ScriptableObject, PlayerMoveBehaviour
         Vector3 position = (playerTransform.forward * moveInput.y * moveSpeed) + (playerTransform.right * moveInput.x * moveSpeed);
         nextPosition = playerTransform.position + position;
 
-
-        //Set the player rotation based on the look transform
-        playerTransform.rotation = Quaternion.Euler(0, followTransform.transform.rotation.eulerAngles.y, 0);
-
-        //reset the y rotation of the look transform
-        followTransform.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
-
         playerTransform.position = nextPosition;
+
+        //Maybe use velocity? (jittering)
+        //playerTransform.GetComponent<Rigidbody>().velocity = nextPosition * moveSpeed;
     }
 }

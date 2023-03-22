@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float reviveTime = 2f;
     [SerializeField] private float despawnRagdollCloneTime = 15f;
     [SerializeField] private float restartInput;
+    private Quaternion zeroQuaternion = new Quaternion(0, 0, 0, 0);
     [Header("Inventory Settings")]
     public PlayerInvetoryComponent inventoryBehaviour;
     [SerializeField] private GameObject[] visualInventoryHealthPoints;
@@ -115,6 +116,8 @@ public class PlayerController : MonoBehaviour
 
         InitiateInventory();
 
+        SetStartPosition();
+
     }
 
     private void OnValidate()
@@ -129,8 +132,22 @@ public class PlayerController : MonoBehaviour
         UpdateLastPosition();
         Ragdoll();
         Restart();
+        CheckMeshRotation();
         if (!canUseLogic) return;
         Move(); //--> move into fixed and look here
+    }
+
+    private void CheckMeshRotation()
+    {
+        if (playerAnim.transform.rotation != zeroQuaternion)
+        {
+            playerAnim.transform.rotation = zeroQuaternion;
+        }
+    }
+
+    private void SetStartPosition()
+    {
+        startPosition = transform.position;
     }
 
     private void FixedUpdate()
@@ -138,6 +155,7 @@ public class PlayerController : MonoBehaviour
         if (!canUseLogic) return;
         Jump();
     }
+
 
     /// <summary>
     /// Locks and Hides the Cursor
@@ -268,6 +286,7 @@ public class PlayerController : MonoBehaviour
         foreach (Rigidbody rigidbody in ragdollbodyParts)
         {
             rigidbody.isKinematic = true;
+            //rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
         }
         foreach (Collider collider in ragdollColliders)
         {
@@ -277,8 +296,7 @@ public class PlayerController : MonoBehaviour
         playerAnim.enabled = true;
         IsRagdoll = false;
         canUseLogic = true;
-        playerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
-        playerAnim.transform.rotation = new Quaternion(0, 0, 0, 0);
+        playerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY; 
         playerCollider.enabled = true;
         playerRigidbody.isKinematic = false;
 
@@ -319,7 +337,7 @@ public class PlayerController : MonoBehaviour
     public void SetDead()
     {
         IsDead = true;
-            RagdollOn();
+        RagdollOn();
         if (HasHealthPoints())
         {
             StartCoroutine(ReviveWithTime(InventoryItemType.HealthPoint, 1, lastPosition, true));
