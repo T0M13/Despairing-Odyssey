@@ -120,8 +120,8 @@ Material:
     - _EnvironmentReflections: 1
     - _Fog: 1
     - _Fresnel: 1
-    - _FresnelSmoothness: 0.1
-    - _FresnelThickness: 0.45
+    - _FresnelSmoothness: 0.2
+    - _FresnelThickness: 0.9
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -130,14 +130,14 @@ Material:
     - _Parallax: 0.005
     - _PureShadowColor: 0
     - _QueueOffset: 0
-    - _Ramp0: 0.44
-    - _Ramp1: 0.63
-    - _RampSmoothness: 0.2
+    - _Ramp0: 0
+    - _Ramp1: 0.7
+    - _RampSmoothness: 0.3
     - _RampTriple: 1
     - _ReceiveShadows: 1
-    - _ReflectionBlend: 0.5
+    - _ReflectionBlend: 0.474
     - _ReflectionProbes: 0
-    - _ReflectionSmoothness: 0.5
+    - _ReflectionSmoothness: 0.52
     - _Reflections: 0
     - _ShadowMask: 0
     - _Smoothness: 0.5
