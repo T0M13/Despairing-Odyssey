@@ -25,20 +25,20 @@ public class MovingPlatform : MonoBehaviour
         TargetNextWaypoint();
     }
 
-    void FixedUpdate()
-    {
-        _elapsedTime += Time.deltaTime;
+    //void FixedUpdate()
+    //{
+    //    _elapsedTime += Time.deltaTime;
 
-        float elapsedPercentage = _elapsedTime / _timeToWaypoint;
-        elapsedPercentage = Mathf.SmoothStep(0, 1, elapsedPercentage);
-        transform.position = Vector3.Lerp(_previousWaypoint.position, _targetWaypoint.position, elapsedPercentage);
-        transform.rotation = Quaternion.Lerp(_previousWaypoint.rotation, _targetWaypoint.rotation, elapsedPercentage);
+    //    float elapsedPercentage = _elapsedTime / _timeToWaypoint;
+    //    elapsedPercentage = Mathf.SmoothStep(0, 1, elapsedPercentage);
+    //    transform.position = Vector3.Lerp(_previousWaypoint.position, _targetWaypoint.position, elapsedPercentage);
+    //    transform.rotation = Quaternion.Lerp(_previousWaypoint.rotation, _targetWaypoint.rotation, elapsedPercentage);
 
-        if (elapsedPercentage >= 1)
-        {
-            TargetNextWaypoint();
-        }
-    }
+    //    if (elapsedPercentage >= 1)
+    //    {
+    //        TargetNextWaypoint();
+    //    }
+    //}
 
     private void TargetNextWaypoint()
     {
@@ -55,6 +55,20 @@ public class MovingPlatform : MonoBehaviour
     
     private void Update()
     {
+        _elapsedTime += Time.deltaTime;
+
+        float elapsedPercentage = _elapsedTime / _timeToWaypoint;
+        elapsedPercentage = Mathf.SmoothStep(0, 1, elapsedPercentage);
+        transform.position = Vector3.Lerp(_previousWaypoint.position, _targetWaypoint.position, elapsedPercentage);
+        transform.rotation = Quaternion.Lerp(_previousWaypoint.rotation, _targetWaypoint.rotation, elapsedPercentage);
+
+        if (elapsedPercentage >= 1)
+        {
+            TargetNextWaypoint();
+        }
+
+
+
         if (player == null) return;
         if (player.IsRagdoll || (player.IsRagdoll && player.IsDead))
         {
