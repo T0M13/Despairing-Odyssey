@@ -133,6 +133,7 @@ public class PlayerController : MonoBehaviour
         Ragdoll();
         Restart();
         CheckMeshRotation();
+        CheckInAir();
         if (!canUseLogic) return;
         Move(); //--> move into fixed and look here
     }
@@ -244,6 +245,18 @@ public class PlayerController : MonoBehaviour
             jumpBehaviour.JumpWithAnimation(playerRigidbody, jumpInput, playerAnim);
             jumpInput = 0;
         }
+    }
+
+    private void CheckInAir()
+    {
+        //if (!jumpBehaviour.IsGrounded && playerRigidbody.velocity.y < 0)
+        //{
+        //    moveBehaviour.moveSpeed = moveBehaviour.MoveSpeedInAir;
+        //}
+        //else
+        //{
+        //    moveBehaviour.moveSpeed = moveBehaviour.MoveSpeedNormal;
+        //}
     }
 
     private void Ragdoll()

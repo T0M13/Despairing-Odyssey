@@ -204,6 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a93f53759d39d44f99f1360150a8ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useCollisionEnter: 1
+  useTriggerEnter: 0
 --- !u!33 &8802437851611682746
 MeshFilter:
   m_ObjectHideFlags: 0

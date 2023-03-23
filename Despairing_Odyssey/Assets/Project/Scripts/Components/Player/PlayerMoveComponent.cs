@@ -19,6 +19,12 @@ public class PlayerMoveComponent : ScriptableObject, PlayerMoveBehaviour
     [SerializeField] Quaternion nextRotation;
 
     public float moveSpeed = 1f;
+    [SerializeField] private AnimationCurve moveSpeedCurve;
+    [SerializeField] private float moveSpeedInAir = 1f;
+    [SerializeField] private float moveSpeedNormal = 2f;
+
+    public float MoveSpeedInAir { get => moveSpeedInAir; set => moveSpeedInAir = value; }
+    public float MoveSpeedNormal { get => moveSpeedNormal; set => moveSpeedNormal = value; }
 
     public void Move(Transform playerTransform, Transform followTransform, Vector2 lookInput, Vector2 moveInput)
     {

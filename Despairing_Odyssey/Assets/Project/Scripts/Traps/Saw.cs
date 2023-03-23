@@ -17,13 +17,5 @@ public class Saw : MonoBehaviour
         transform.Rotate(new Vector3(transform.localRotation.x + 1 * sawSpeed * Time.deltaTime, transform.localRotation.y, 0));
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
 
-        if (collision.gameObject.GetComponent<PlayerController>())
-        {
-            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-            player.SetDead();
-        }
-    }
 }

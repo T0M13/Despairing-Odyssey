@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 24580122800114096}
   - component: {fileID: 50477010107770086}
   - component: {fileID: 2072215480703050249}
+  - component: {fileID: 8203618679478683009}
   m_Layer: 0
   m_Name: Saw
   m_TagString: Untagged
@@ -113,3 +114,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sawSpeed: 1000
+--- !u!114 &8203618679478683009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24580122802161852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a93f53759d39d44f99f1360150a8ee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCollisionEnter: 1
+  useTriggerEnter: 0
