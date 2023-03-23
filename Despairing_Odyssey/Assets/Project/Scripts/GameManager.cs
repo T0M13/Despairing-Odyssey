@@ -16,6 +16,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Vector3 gravityScale = new Vector3(0,-9.81f,0);
 
 
+    private void OnEnable()
+    {
+        PlayerController.instance.OnDeath += AddDeath;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.instance.OnDeath -= AddDeath;
+    }
+
     private void Awake()
     {
         if (instance != null)

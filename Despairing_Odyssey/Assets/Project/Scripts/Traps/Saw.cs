@@ -14,7 +14,7 @@ public class Saw : MonoBehaviour
 
     private void Update()
     {
-        transform.Rotate(new Vector3(transform.localRotation.x + 1 * sawSpeed * Time.deltaTime, transform.localRotation.y, 0));
+        transform.Rotate(new Vector3(transform.rotation.x + 1 * sawSpeed * Time.deltaTime, transform.rotation.y, 0));
     }
 
 

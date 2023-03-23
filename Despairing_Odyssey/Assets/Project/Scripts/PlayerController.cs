@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 using System.Linq;
+using System;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -62,6 +63,8 @@ public class PlayerController : MonoBehaviour
     public bool SavedPositionSaved { get => savedPositionSaved; set => savedPositionSaved = value; }
     public bool IsDead { get => isDead; set => isDead = value; }
     public bool IsRagdoll { get => isRagdoll; set => isRagdoll = value; }
+
+    public event Action OnDeath;
 
     public void OnMove(InputValue value)
     {
@@ -350,6 +353,7 @@ public class PlayerController : MonoBehaviour
     public void SetDead()
     {
         IsDead = true;
+        OnDeath.Invoke();
         RagdollOn();
         if (HasHealthPoints())
         {
