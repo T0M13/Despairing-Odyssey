@@ -296,7 +296,7 @@ public class PlayerController : MonoBehaviour
         playerAnim.enabled = true;
         IsRagdoll = false;
         canUseLogic = true;
-        playerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY; 
+        playerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         playerCollider.enabled = true;
         playerRigidbody.isKinematic = false;
 
@@ -393,6 +393,7 @@ public class PlayerController : MonoBehaviour
     {
         GameObject ragdollClone = Instantiate(playerAnim.gameObject, playerAnim.transform.position, playerAnim.transform.rotation);
         StartCoroutine(DespawnRagdollClone(ragdollClone));
+
     }
 
     private IEnumerator DespawnRagdollClone(GameObject ragdollClone)
