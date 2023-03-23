@@ -6,15 +6,34 @@ public class RotatingSwords : MonoBehaviour
 {
     [SerializeField] bool counterclockwise;
     [SerializeField] private int speed;
+    [Range(1, 4)]
+    [SerializeField] private int swordAmount = 2;
+    [SerializeField] private GameObject[] swords = new GameObject[4];
+
     
 
     private void Start()
     {
         ChangeDirection();
+        SetSwordAmount();  
     }
     private void OnValidate()
     {
-        ChangeDirection();
+        //ChangeDirection();
+        SetSwordAmount();
+    }
+
+    private void SetSwordAmount()
+    {
+        for (int i = 0; i < swords.Length; i++)
+        {
+            swords[i].SetActive(false);
+        }
+
+        for (int i = 0; i < swordAmount; i++)
+        {
+            swords[i].SetActive(true);
+        }
     }
 
 

@@ -112,6 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a93f53759d39d44f99f1360150a8ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useCollisionEnter: 0
+  useTriggerEnter: 1
 --- !u!64 &3194530413104001114
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -238,6 +240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a93f53759d39d44f99f1360150a8ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useCollisionEnter: 0
+  useTriggerEnter: 1
 --- !u!64 &3194530413975138707
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -364,6 +368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a93f53759d39d44f99f1360150a8ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useCollisionEnter: 0
+  useTriggerEnter: 1
 --- !u!64 &3194530414088146886
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -490,6 +496,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a93f53759d39d44f99f1360150a8ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useCollisionEnter: 0
+  useTriggerEnter: 1
 --- !u!64 &5177332596007711129
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -620,4 +628,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counterclockwise: 1
-  speed: 80
+  speed: -80
+  swordAmount: 2
+  swords:
+  - {fileID: 5177332596008719039}
+  - {fileID: 3194530413104001091}
+  - {fileID: 3194530414088146895}
+  - {fileID: 3194530413975138712}
