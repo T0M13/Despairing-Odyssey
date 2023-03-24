@@ -6,56 +6,50 @@ using UnityEngine.TextCore.Text;
 
 public class RotateingPlatform : MonoBehaviour
 {
-    [SerializeField] bool counterclockwise;
+    [SerializeField] private bool counterclockwise;
     [SerializeField] private int speed;
+    [SerializeField] private Vector3 rotationAxis = Vector3.up; // default axis of rotation
     private PlayerController player;
 
     private void Start()
     {
         ChangeDirection();
     }
+
     private void OnValidate()
     {
         ChangeDirection();
     }
 
-
     private void ChangeDirection()
     {
-        if (counterclockwise)
-            speed = -speed;
-        else
-            speed = -speed;
+        speed = counterclockwise ? -Mathf.Abs(speed) : Mathf.Abs(speed);
     }
 
     private void Update()
     {
-        transform.Rotate(new Vector3(0, speed * Time.deltaTime, 0));
+        transform.Rotate(rotationAxis, speed * Time.deltaTime);
         if (player == null) return;
         if (player.IsRagdoll || (player.IsRagdoll && player.IsDead))
         {
             Unparent(player.transform);
         }
-        
     }
 
-    private void OnTriggerStay(Collider col)
+    private void OnCollisionEnter(Collision col)
     {
-        if (col.GetComponent<PlayerController>())
+        if (col.gameObject.GetComponent<PlayerController>())
         {
-            player = col.GetComponent<PlayerController>();
-
-
+            player = col.gameObject.GetComponent<PlayerController>();
             player.transform.parent = transform;
         }
-
     }
 
-    private void OnTriggerExit(Collider col)
+    private void OnCollisionExit(Collision col)
     {
-        if (col.GetComponent<PlayerController>())
+        if (col.gameObject.GetComponent<PlayerController>())
         {
-            Unparent(col.transform);
+            Unparent(col.gameObject.transform);
         }
     }
 
