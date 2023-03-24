@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        LockHideCursor();
     }
 
 
@@ -83,6 +85,24 @@ public class GameManager : MonoBehaviour
 
             timerText = hours + ":" + minutes + ":" + seconds;
         }
+    }
+
+    /// <summary>
+    /// Locks and Hides the Cursor
+    /// </summary>
+    private void LockHideCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    /// <summary>
+    /// Unlocks and Shows the Cursor
+    /// </summary>
+    private void UnlockShowCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void GameOver()

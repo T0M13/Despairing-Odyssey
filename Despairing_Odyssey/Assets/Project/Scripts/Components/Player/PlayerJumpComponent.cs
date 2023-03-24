@@ -35,22 +35,22 @@ public class PlayerJumpComponent : ScriptableObject, PlayerJumpBehaviour
     }
     public void Jump(Rigidbody rb, float jumpInput)
     {
-        if (checkGrounded)
-        {
-            if (IsPlayerGrounded(rb) && rb.velocity.y <= 0)
-            {
-                ResetJumps();
-            }
-        }
+        //    if (checkGrounded)
+        //    {
+        //        if (IsPlayerGrounded(rb) && rb.velocity.y <= 0)
+        //        {
+        //            ResetJumps();
+        //        }
+        //    }
 
-        if (jumpInput == 1 && jumpsLeft > 0)
-        {
-            jumpsLeft -= 1;
-            rb.AddForce(Vector2.up * jumpForce, jumpForceMode);
-        }
+        //    if (jumpInput == 1 && jumpsLeft > 0)
+        //    {
+        //        jumpsLeft -= 1;
+        //        rb.AddForce(Vector2.up * jumpForce, jumpForceMode);
+        //    }
     }
 
-    public void JumpWithAnimation(Rigidbody rb, float jumpInput, Animator anim)
+public void JumpWithAnimation(Rigidbody rb, float jumpInput, Animator anim)
     {
         if (checkGrounded)
         {
