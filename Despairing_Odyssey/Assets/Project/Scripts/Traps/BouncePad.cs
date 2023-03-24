@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BouncePad : MonoBehaviour
 {
-    public float bounceForceMagnitude = 10.0f; 
-    public Vector3 bounceForceDirection = Vector3.up; 
+    public float bounceVelocity = 10.0f;
+    public Vector3 bounceDirection = Vector3.up;
 
     private void OnTriggerEnter(Collider col)
     {
@@ -14,8 +14,8 @@ public class BouncePad : MonoBehaviour
             Rigidbody rb = col.gameObject.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                Vector3 bounceVector = bounceForceMagnitude * bounceForceDirection.normalized;
-                rb.AddForce(bounceVector, ForceMode.Impulse);
+                Vector3 velocity = bounceDirection.normalized * bounceVelocity;
+                rb.velocity = velocity;
             }
         }
     }

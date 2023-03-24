@@ -127,5 +127,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109d5aa13cd1663499b8b1270c001c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceForceMagnitude: 15
-  bounceForceDirection: {x: 0, y: 1, z: 0}
+  bounceVelocity: 15
+  bounceDirection: {x: 0, y: 1, z: 0}
