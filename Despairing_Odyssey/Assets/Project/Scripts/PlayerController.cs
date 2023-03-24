@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera playerRigidbodyCamera;
     [Header("Move Settings")]
     [SerializeField] private PlayerMoveComponent moveBehaviour;
+    [SerializeField] private PlayerLookComponent lookBehaviour;
     [SerializeField] private PlayerJumpComponent jumpBehaviour;
     [SerializeField] private bool canMove = true;
     [SerializeField] private bool isMoving;
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour
     [Header("Animation Settings")]
     private int moveInputY_A;
     private int moveInputX_A;
-    private int isMoving_A; 
+    private int isMoving_A;
 
     public Vector3 SavedPosition { get => savedPosition; set => savedPosition = value; }
     public bool SavedPositionSaved { get => savedPositionSaved; set => savedPositionSaved = value; }
@@ -104,7 +105,6 @@ public class PlayerController : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        LockHideCursor();
         GetRigidbody();
         GetCapsuleCollider();
         GetAnimator();
@@ -138,8 +138,9 @@ public class PlayerController : MonoBehaviour
         Restart();
         CheckMeshRotation();
         CheckInAir();
+        playerAnim.transform.localPosition = Vector3.zero;
         if (!canUseLogic) return;
-        Move(); //--> move into fixed and look here
+        Look();
     }
 
     private void CheckMeshRotation()
@@ -158,27 +159,11 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (!canUseLogic) return;
+        Move(); 
         Jump();
+
     }
 
-
-    /// <summary>
-    /// Locks and Hides the Cursor
-    /// </summary>
-    private void LockHideCursor()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    /// <summary>
-    /// Unlocks and Shows the Cursor
-    /// </summary>
-    private void UnlockShowCursor()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
 
     /// <summary>
     /// Gets the Rigidbody Component
@@ -218,7 +203,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canMove)
         {
-            moveBehaviour.Move(transform, followTransform, lookInput, MoveInput);
+            moveBehaviour.Move(transform, playerRigidbody, followTransform, MoveInput, lookBehaviour.angles);
             if (MoveInput.x != 0 || MoveInput.y != 0)
             {
                 isMoving = true;
@@ -230,6 +215,11 @@ public class PlayerController : MonoBehaviour
 
             UpdateMoveAnimation();
         }
+    }
+
+    private void Look()
+    {
+        lookBehaviour.Look(transform, followTransform, lookInput);
     }
 
     private void UpdateMoveAnimation()
@@ -253,7 +243,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckInAir()
     {
-        if (!jumpBehaviour.IsGrounded )
+        if (!jumpBehaviour.IsGrounded)
         {
             //moveBehaviour.moveSpeed = moveBehaviour.MoveSpeedInAir;
             //playerRigidbody.interpolation = RigidbodyInterpolation.None;
@@ -305,7 +295,7 @@ public class PlayerController : MonoBehaviour
         foreach (Rigidbody rigidbody in ragdollbodyParts)
         {
             rigidbody.isKinematic = true;
-            //rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+            rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
         }
         foreach (Collider collider in ragdollColliders)
         {
@@ -328,6 +318,7 @@ public class PlayerController : MonoBehaviour
         foreach (Rigidbody rigidbody in ragdollbodyParts)
         {
             rigidbody.isKinematic = false;
+            rigidbody.interpolation = RigidbodyInterpolation.None;
         }
         foreach (Collider collider in ragdollColliders)
         {
