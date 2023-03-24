@@ -92,6 +92,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   timer: 2
+  effectBehaviour: {fileID: 11400000, guid: 9cb2bd7f7d688144e938eef57daf907a, type: 2}
 --- !u!1 &8244265296187998280
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4381602426473614, guid: be68163c62613b14c9e8423edadd4649, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.115
       objectReference: {fileID: 0}
     - target: {fileID: 4381602426473614, guid: be68163c62613b14c9e8423edadd4649, type: 3}
       propertyPath: m_LocalPosition.z

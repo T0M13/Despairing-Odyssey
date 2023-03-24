@@ -15,14 +15,14 @@ public class InventoryItem : MonoBehaviour
     [SerializeField] private float hoverSpeed = 0.4f;
     [SerializeField] private AnimationCurve hoverCurve;
     [SerializeField] private float timer = 2f;
-
-
+    [SerializeField] private EffectComponent effectBehaviour;
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerController>())
         {
             PlayerController player = other.GetComponent<PlayerController>();
             if (player.inventoryBehaviour.inventoryFull) return;
+            effectBehaviour.SpawnEffectWithDispose(transform.position, effectBehaviour.disposeTime);
             player.inventoryBehaviour.AddItem(type, amount);
             player.UpdateInventory();
             DeactivateItem();

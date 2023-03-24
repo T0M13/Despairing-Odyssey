@@ -25,6 +25,7 @@ public class PlayerMoveComponent : ScriptableObject, PlayerMoveBehaviour
 
     public float MoveSpeedInAir { get => moveSpeedInAir; set => moveSpeedInAir = value; }
     public float MoveSpeedNormal { get => moveSpeedNormal; set => moveSpeedNormal = value; }
+    public Vector3 NextPosition { get => nextPosition; set => nextPosition = value; }
 
     public void Move(Transform playerTransform, Transform followTransform, Vector2 lookInput, Vector2 moveInput)
     {
@@ -76,12 +77,12 @@ public class PlayerMoveComponent : ScriptableObject, PlayerMoveBehaviour
 
         if (moveInput.x == 0 && moveInput.y == 0)
         {
-            nextPosition = playerTransform.position;
+            NextPosition = playerTransform.position;
             return;
         }
         float moveSpeed = this.moveSpeed / 100f;
         Vector3 position = (playerTransform.forward * moveInput.y * moveSpeed) + (playerTransform.right * moveInput.x * moveSpeed);
-        nextPosition = playerTransform.position + position;
+        NextPosition = playerTransform.position + position;
 
         //Set the player rotation based on the look transform
         playerTransform.rotation = Quaternion.Euler(0, followTransform.transform.rotation.eulerAngles.y, 0);
@@ -90,7 +91,7 @@ public class PlayerMoveComponent : ScriptableObject, PlayerMoveBehaviour
         followTransform.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
 
 
-        playerTransform.position = nextPosition;
+        playerTransform.position = NextPosition;
 
         //Maybe use velocity? (jittering)
         //playerTransform.GetComponent<Rigidbody>().velocity = nextPosition * moveSpeed;

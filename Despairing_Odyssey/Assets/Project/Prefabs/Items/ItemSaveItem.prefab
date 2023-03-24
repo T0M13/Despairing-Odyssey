@@ -176,6 +176,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   timer: 2
+  effectBehaviour: {fileID: 11400000, guid: 9211fec16d858b64db33f7f3c1ff560b, type: 2}
 --- !u!1001 &2472911091879719916
 PrefabInstance:
   m_ObjectHideFlags: 0

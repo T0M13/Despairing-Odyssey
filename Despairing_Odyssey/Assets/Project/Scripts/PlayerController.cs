@@ -57,18 +57,19 @@ public class PlayerController : MonoBehaviour
     [Header("Animation Settings")]
     private int moveInputY_A;
     private int moveInputX_A;
-    private int isMoving_A;
+    private int isMoving_A; 
 
     public Vector3 SavedPosition { get => savedPosition; set => savedPosition = value; }
     public bool SavedPositionSaved { get => savedPositionSaved; set => savedPositionSaved = value; }
     public bool IsDead { get => isDead; set => isDead = value; }
     public bool IsRagdoll { get => isRagdoll; set => isRagdoll = value; }
+    public Vector2 MoveInput { get => moveInput; set => moveInput = value; }
 
     public event Action OnDeath;
 
     public void OnMove(InputValue value)
     {
-        moveInput = value.Get<Vector2>();
+        MoveInput = value.Get<Vector2>();
     }
 
     public void OnLook(InputValue value)
@@ -217,8 +218,8 @@ public class PlayerController : MonoBehaviour
     {
         if (canMove)
         {
-            moveBehaviour.Move(transform, followTransform, lookInput, moveInput);
-            if (moveInput.x != 0 || moveInput.y != 0)
+            moveBehaviour.Move(transform, followTransform, lookInput, MoveInput);
+            if (MoveInput.x != 0 || MoveInput.y != 0)
             {
                 isMoving = true;
             }
@@ -234,8 +235,8 @@ public class PlayerController : MonoBehaviour
     private void UpdateMoveAnimation()
     {
         playerAnim.SetBool(isMoving_A, isMoving);
-        playerAnim.SetFloat(moveInputX_A, moveInput.x);
-        playerAnim.SetFloat(moveInputY_A, moveInput.y);
+        playerAnim.SetFloat(moveInputX_A, MoveInput.x);
+        playerAnim.SetFloat(moveInputY_A, MoveInput.y);
     }
 
     /// <summary>
@@ -252,14 +253,16 @@ public class PlayerController : MonoBehaviour
 
     private void CheckInAir()
     {
-        //if (!jumpBehaviour.IsGrounded && playerRigidbody.velocity.y < 0)
-        //{
-        //    moveBehaviour.moveSpeed = moveBehaviour.MoveSpeedInAir;
-        //}
-        //else
-        //{
-        //    moveBehaviour.moveSpeed = moveBehaviour.MoveSpeedNormal;
-        //}
+        if (!jumpBehaviour.IsGrounded )
+        {
+            //moveBehaviour.moveSpeed = moveBehaviour.MoveSpeedInAir;
+            //playerRigidbody.interpolation = RigidbodyInterpolation.None;
+        }
+        else
+        {
+            //moveBehaviour.moveSpeed = moveBehaviour.MoveSpeedNormal;
+            //playerRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+        }
     }
 
     private void Ragdoll()
