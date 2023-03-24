@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isRagdoll = false;
     [SerializeField] private bool canRagdoll = true;
     [SerializeField] private float ragdollInput;
+    [SerializeField] private float impactForce = -10f;
     [SerializeField] private Rigidbody[] ragdollbodyParts;
     [SerializeField] private Collider[] ragdollColliders;
     [Header("Animation Settings")]
@@ -138,9 +139,19 @@ public class PlayerController : MonoBehaviour
         Restart();
         CheckMeshRotation();
         CheckInAir();
+        CheckImpact();
         playerAnim.transform.localPosition = Vector3.zero;
         if (!canUseLogic) return;
         Look();
+
+    }
+
+    private void CheckImpact()
+    {
+        if (playerRigidbody.velocity.y <= impactForce && jumpBehaviour.IsGrounded)
+        {
+            RagdollOn();
+        }
     }
 
     private void CheckMeshRotation()
@@ -159,7 +170,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (!canUseLogic) return;
-        Move(); 
+        Move();
         Jump();
 
     }
