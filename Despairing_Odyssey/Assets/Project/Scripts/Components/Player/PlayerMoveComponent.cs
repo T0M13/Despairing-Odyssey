@@ -12,10 +12,12 @@ public class PlayerMoveComponent : ScriptableObject, PlayerMoveBehaviour
 
     public float moveSpeed = 700f;
     public float maxMagnitude = 10f;
+    public bool hasMaxMagnitude = true;
     public Vector3 velocity;
 
     public float stepHeight = 0.3f;
     public float stepSmooth = 0.1f;
+    public bool canSlide = false;
 
 
     public void Move(Transform playerTransform, Rigidbody playerRigid, Transform followTransform, Vector2 moveInput, Vector3 angles)
@@ -24,8 +26,11 @@ public class PlayerMoveComponent : ScriptableObject, PlayerMoveBehaviour
         if (moveInput.x == 0 && moveInput.y == 0)
         {
             nextPosition = playerTransform.position;
-            velocity = Vector3.zero + (playerTransform.up * playerRigid.velocity.y);
-            playerRigid.velocity = velocity;
+            if (!canSlide)
+            {
+                velocity = Vector3.zero + (playerTransform.up * playerRigid.velocity.y);
+                playerRigid.velocity = velocity;
+            }
             return;
         }
 
@@ -42,6 +47,7 @@ public class PlayerMoveComponent : ScriptableObject, PlayerMoveBehaviour
         velocity = (playerTransform.forward * moveInput.y * moveSpeed) + (playerTransform.right * moveInput.x * moveSpeed) + (playerTransform.up * playerRigid.velocity.y);
         playerRigid.velocity = velocity;
 
+
         //playerRigid.AddForce(velocity, ForceMode.VelocityChange);
 
         //playerRigid.MovePosition(nextPosition);
@@ -53,6 +59,7 @@ public class PlayerMoveComponent : ScriptableObject, PlayerMoveBehaviour
 
     public void ClampMovementMagnitude(Rigidbody playerRigid)
     {
+        if (!hasMaxMagnitude) return;
 
         if (playerRigid.velocity.magnitude > maxMagnitude)
         {

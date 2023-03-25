@@ -88,6 +88,12 @@ public class PlayerJumpComponent : ScriptableObject, PlayerJumpBehaviour
         }
     }
 
+    public void PlayJumpAnimation(Animator anim)
+    {
+        isJumping = true;
+        anim.SetBool(jumpInput_A, isJumping);
+    }
+
     private bool IsPlayerGrounded(Rigidbody rb)
     {
         if (RayCastWithOffset(rb, Vector3.zero) || RayCastWithOffset(rb, groundDetectionOffset_Left) || RayCastWithOffset(rb, groundDetectionOffset_Right) || RayCastWithOffset(rb, groundDetectionOffset_Forward) || RayCastWithOffset(rb, groundDetectionOffset_Backward))

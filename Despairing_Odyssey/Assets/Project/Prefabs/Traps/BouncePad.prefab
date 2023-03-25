@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4015399203300887473}
   - component: {fileID: 4015399203302101175}
   - component: {fileID: 3989430681245762963}
-  - component: {fileID: 4015399203302101173}
   - component: {fileID: 4015399203302101174}
+  - component: {fileID: 1546546809}
   m_Layer: 7
   m_Name: BouncePad
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4015399203299895341}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 47.06, y: -0.80579346, z: -17.8}
   m_LocalScale: {x: 2.88, y: 1.7373914, z: 2.88}
   m_ConstrainProportionsScale: 1
@@ -101,20 +101,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 0041361d92246e649950812834635a46, type: 3}
---- !u!64 &4015399203302101173
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4015399203299895341}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 0041361d92246e649950812834635a46, type: 3}
 --- !u!114 &4015399203302101174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,4 +114,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceVelocity: 15
+  bounceThreshold: -5
   bounceDirection: {x: 0, y: 1, z: 0}
+--- !u!135 &1546546809
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4015399203299895341}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.36142433
+  m_Center: {x: 0, y: 0.38, z: 0}

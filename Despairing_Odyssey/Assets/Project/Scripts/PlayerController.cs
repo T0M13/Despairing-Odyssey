@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviour
     public bool IsDead { get => isDead; set => isDead = value; }
     public bool IsRagdoll { get => isRagdoll; set => isRagdoll = value; }
     public Vector2 MoveInput { get => moveInput; set => moveInput = value; }
+    public PlayerJumpComponent JumpBehaviour { get => jumpBehaviour; set => jumpBehaviour = value; }
+    public Animator PlayerAnim { get => playerAnim; set => playerAnim = value; }
 
     public event Action OnDeath;
 
@@ -149,7 +151,7 @@ public class PlayerController : MonoBehaviour
         CheckImpact();
         CheckMovementMagnitude();
 
-        playerAnim.transform.localPosition = Vector3.zero;
+        PlayerAnim.transform.localPosition = Vector3.zero;
         if (!canUseLogic) return;
         Look();
 
@@ -168,7 +170,7 @@ public class PlayerController : MonoBehaviour
     private void CheckImpact()
     {
         if (!canHaveImpact) return;
-        if (playerRigidbody.velocity.y <= impactForce && jumpBehaviour.IsGrounded)
+        if (playerRigidbody.velocity.y <= impactForce && JumpBehaviour.IsGrounded)
         {
             RagdollOn();
         }
@@ -176,9 +178,9 @@ public class PlayerController : MonoBehaviour
 
     private void CheckMeshRotation()
     {
-        if (playerAnim.transform.rotation != zeroQuaternion)
+        if (PlayerAnim.transform.rotation != zeroQuaternion)
         {
-            playerAnim.transform.rotation = zeroQuaternion;
+            PlayerAnim.transform.rotation = zeroQuaternion;
         }
     }
 
@@ -210,7 +212,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void GetAnimator()
     {
-        playerAnim = transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+        PlayerAnim = transform.GetChild(0).GetChild(0).GetComponent<Animator>();
     }
 
     /// <summary>
@@ -262,9 +264,9 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateMoveAnimation()
     {
-        playerAnim.SetBool(isMoving_A, isMoving);
-        playerAnim.SetFloat(moveInputX_A, MoveInput.x);
-        playerAnim.SetFloat(moveInputY_A, MoveInput.y);
+        PlayerAnim.SetBool(isMoving_A, isMoving);
+        PlayerAnim.SetFloat(moveInputX_A, MoveInput.x);
+        PlayerAnim.SetFloat(moveInputY_A, MoveInput.y);
     }
 
     /// <summary>
@@ -274,14 +276,14 @@ public class PlayerController : MonoBehaviour
     {
         if (canJump)
         {
-            jumpBehaviour.JumpWithAnimation(playerRigidbody, jumpInput, playerAnim);
+            JumpBehaviour.JumpWithAnimation(playerRigidbody, jumpInput, PlayerAnim);
             jumpInput = 0;
         }
     }
 
     private void CheckInAir()
     {
-        if (!jumpBehaviour.IsGrounded)
+        if (!JumpBehaviour.IsGrounded)
         {
             //moveBehaviour.moveSpeed = moveBehaviour.MoveSpeedInAir;
             //playerRigidbody.interpolation = RigidbodyInterpolation.None;
@@ -341,7 +343,7 @@ public class PlayerController : MonoBehaviour
             collider.enabled = false;
         }
 
-        playerAnim.enabled = true;
+        PlayerAnim.enabled = true;
         IsRagdoll = false;
         canUseLogic = true;
         playerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
@@ -364,7 +366,7 @@ public class PlayerController : MonoBehaviour
             collider.enabled = true;
         }
 
-        playerAnim.enabled = false;
+        PlayerAnim.enabled = false;
         IsRagdoll = true;
         canUseLogic = false;
         playerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
@@ -441,7 +443,7 @@ public class PlayerController : MonoBehaviour
 
     public void SpawnRagdollClone()
     {
-        GameObject ragdollClone = Instantiate(playerAnim.gameObject, playerAnim.transform.position, playerAnim.transform.rotation);
+        GameObject ragdollClone = Instantiate(PlayerAnim.gameObject, PlayerAnim.transform.position, PlayerAnim.transform.rotation);
         StartCoroutine(DespawnRagdollClone(ragdollClone));
 
     }
@@ -518,7 +520,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateLastPosition()
     {
-        if (IsDead || !jumpBehaviour.IsGrounded) return;
+        if (IsDead || !JumpBehaviour.IsGrounded) return;
         lastPositionTimer -= Time.unscaledDeltaTime;
         if (lastPositionTimer <= 0)
         {
@@ -529,7 +531,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        jumpBehaviour.DrawGizmos(playerRigidbody);
+        JumpBehaviour.DrawGizmos(playerRigidbody);
     }
 
 }

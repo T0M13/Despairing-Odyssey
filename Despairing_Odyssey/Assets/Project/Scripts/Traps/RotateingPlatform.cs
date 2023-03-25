@@ -7,10 +7,19 @@ using UnityEngine.TextCore.Text;
 public class RotateingPlatform : MonoBehaviour
 {
     [SerializeField] private bool counterclockwise;
-    [SerializeField] private int speed;
+    [SerializeField] private float speed;
     [SerializeField] private Vector3 rotationAxis = Vector3.up; // default axis of rotation
-    private PlayerController player;
+    [SerializeField] private Rigidbody platformRigidbody;
 
+    private void Awake()
+    {
+        platformRigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void FixedUpdate()
+    {
+        transform.Rotate(rotationAxis, speed * Time.fixedDeltaTime);
+    }
     private void Start()
     {
         ChangeDirection();
@@ -29,19 +38,19 @@ public class RotateingPlatform : MonoBehaviour
     private void Update()
     {
         transform.Rotate(rotationAxis, speed * Time.deltaTime);
-        if (player == null) return;
-        if (player.IsRagdoll || (player.IsRagdoll && player.IsDead))
-        {
-            Unparent(player.transform);
-        }
+        //if (player == null) return;
+        //if (player.IsRagdoll || (player.IsRagdoll && player.IsDead))
+        //{
+        //    Unparent(player.transform);
+        //}
     }
 
     private void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.GetComponent<PlayerController>())
         {
-            player = col.gameObject.GetComponent<PlayerController>();
-            player.transform.parent = transform;
+            //player = col.gameObject.GetComponent<PlayerController>();
+            //player.transform.parent = transform;
         }
     }
 
