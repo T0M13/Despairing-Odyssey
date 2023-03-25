@@ -22,7 +22,7 @@ MonoBehaviour:
   groundDetectionRange: 0.28
   groundDetectionLayer:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 200
   groundDetectionOffset: {x: 0, y: 0.1, z: 0}
   jumpForceMode: 1
   jumpClip: {fileID: 7400000, guid: a20f34c7dcb56524aafb11a2bbc659aa, type: 2}

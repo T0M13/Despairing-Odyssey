@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isMoving;
     [SerializeField] private Vector2 moveInput;
     [SerializeField] private Vector2 lookInput;
+    [SerializeField] private GameObject StepRayUpper;
+    [SerializeField] private GameObject StepRayLower;
     [Header("Jump Settings")]
     [SerializeField] private bool canJump = true;
     [SerializeField] private float jumpInput;
@@ -54,6 +56,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool canRagdoll = true;
     [SerializeField] private float ragdollInput;
     [SerializeField] private float impactForce = -10f;
+    [SerializeField] private bool canHaveImpact = false;
     [SerializeField] private Rigidbody[] ragdollbodyParts;
     [SerializeField] private Collider[] ragdollColliders;
     [Header("Animation Settings")]
@@ -123,7 +126,10 @@ public class PlayerController : MonoBehaviour
 
         SetStartPosition();
 
+        SetStepUpHeight();
+
     }
+
 
     private void OnValidate()
     {
@@ -137,17 +143,31 @@ public class PlayerController : MonoBehaviour
         UpdateLastPosition();
         Ragdoll();
         Restart();
+
         CheckMeshRotation();
         CheckInAir();
         CheckImpact();
+        CheckMovementMagnitude();
+
         playerAnim.transform.localPosition = Vector3.zero;
         if (!canUseLogic) return;
         Look();
 
     }
 
+    private void SetStepUpHeight()
+    {
+        moveBehaviour.SetStepUpHeight(StepRayUpper);
+    }
+
+    private void CheckMovementMagnitude()
+    {
+        moveBehaviour.ClampMovementMagnitude(playerRigidbody);
+    }
+
     private void CheckImpact()
     {
+        if (!canHaveImpact) return;
         if (playerRigidbody.velocity.y <= impactForce && jumpBehaviour.IsGrounded)
         {
             RagdollOn();
@@ -169,6 +189,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        StepUp();
         if (!canUseLogic) return;
         Move();
         Jump();
@@ -205,6 +226,12 @@ public class PlayerController : MonoBehaviour
         moveInputY_A = Animator.StringToHash("moveInputY");
         moveInputX_A = Animator.StringToHash("moveInputX");
         isMoving_A = Animator.StringToHash("isMoving");
+    }
+
+
+    private void StepUp()
+    {
+        moveBehaviour.StepUp(transform, playerRigidbody, StepRayLower, StepRayUpper);
     }
 
     /// <summary>
@@ -307,6 +334,7 @@ public class PlayerController : MonoBehaviour
         {
             rigidbody.isKinematic = true;
             rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+
         }
         foreach (Collider collider in ragdollColliders)
         {
@@ -491,7 +519,7 @@ public class PlayerController : MonoBehaviour
     private void UpdateLastPosition()
     {
         if (IsDead || !jumpBehaviour.IsGrounded) return;
-        lastPositionTimer -= Time.deltaTime;
+        lastPositionTimer -= Time.unscaledDeltaTime;
         if (lastPositionTimer <= 0)
         {
             lastPositionTimer = lastPositionUpdateTime;

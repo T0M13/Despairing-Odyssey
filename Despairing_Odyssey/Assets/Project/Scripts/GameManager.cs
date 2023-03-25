@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string timerText;
     [SerializeField] private float startTime;
     [SerializeField] private bool timerIsRunning = false;
+    [SerializeField] private float timeScale = 1f;
     [SerializeField] private bool isGameOver = false;
     [SerializeField] private int deaths = 0;
     [SerializeField] private Vector3 gravityScale = new Vector3(0,-9.81f,0);
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
     private void OnValidate()
     {
         SetGravity();
+        ChangeTimeScale();
     }
 
     public void SetGravity()
@@ -70,6 +72,11 @@ public class GameManager : MonoBehaviour
     public void AddDeath()
     {
         deaths++;
+    }
+
+    public void ChangeTimeScale()
+    {
+        Time.timeScale = timeScale;
     }
 
     private void Timer()
