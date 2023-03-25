@@ -25,6 +25,7 @@ public class SwingBladeTrap : MonoBehaviour
 
     private IEnumerator InitiateSwingBlade()
     {
+
         if (randomize)
             initiateTime = Random.Range(randomMin, randomMax);
 

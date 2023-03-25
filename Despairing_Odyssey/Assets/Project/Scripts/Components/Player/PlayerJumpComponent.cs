@@ -18,6 +18,10 @@ public class PlayerJumpComponent : ScriptableObject, PlayerJumpBehaviour
     [SerializeField] float groundDetectionRange = 2;
     [SerializeField] LayerMask groundDetectionLayer;
     [SerializeField] Vector3 groundDetectionOffset = new Vector3(0, -0.3f, 0);
+    [SerializeField] Vector3 groundDetectionOffset_Left;
+    [SerializeField] Vector3 groundDetectionOffset_Right;
+    [SerializeField] Vector3 groundDetectionOffset_Forward;
+    [SerializeField] Vector3 groundDetectionOffset_Backward;
     [SerializeField] RaycastHit rayHit;
     [Header("Force Mode")]
     [SerializeField] ForceMode jumpForceMode = ForceMode.Impulse;
@@ -50,7 +54,7 @@ public class PlayerJumpComponent : ScriptableObject, PlayerJumpBehaviour
         //    }
     }
 
-public void JumpWithAnimation(Rigidbody rb, float jumpInput, Animator anim)
+    public void JumpWithAnimation(Rigidbody rb, float jumpInput, Animator anim)
     {
         if (checkGrounded)
         {
@@ -86,11 +90,16 @@ public void JumpWithAnimation(Rigidbody rb, float jumpInput, Animator anim)
 
     private bool IsPlayerGrounded(Rigidbody rb)
     {
-        if (Physics.Raycast(rb.transform.position + groundDetectionOffset, Vector2.down * groundDetectionRange, out rayHit, groundDetectionRange, groundDetectionLayer))
+        if (RayCastWithOffset(rb, Vector3.zero) || RayCastWithOffset(rb, groundDetectionOffset_Left) || RayCastWithOffset(rb, groundDetectionOffset_Right) || RayCastWithOffset(rb, groundDetectionOffset_Forward) || RayCastWithOffset(rb, groundDetectionOffset_Backward))
             IsGrounded = true;
         else IsGrounded = false;
 
         return IsGrounded;
+    }
+
+    private bool RayCastWithOffset(Rigidbody rb, Vector3 offset)
+    {
+        return Physics.Raycast(rb.transform.position + groundDetectionOffset + offset, Vector2.down * groundDetectionRange, out rayHit, groundDetectionRange, groundDetectionLayer);
     }
 
     private void ResetJumps()
@@ -102,6 +111,10 @@ public void JumpWithAnimation(Rigidbody rb, float jumpInput, Animator anim)
     {
         Gizmos.color = Color.green;
         Gizmos.DrawRay(rb.transform.position + groundDetectionOffset, Vector2.down * groundDetectionRange);
+        Gizmos.DrawRay(rb.transform.position + groundDetectionOffset + groundDetectionOffset_Left, Vector2.down * groundDetectionRange);
+        Gizmos.DrawRay(rb.transform.position + groundDetectionOffset + groundDetectionOffset_Right, Vector2.down * groundDetectionRange);
+        Gizmos.DrawRay(rb.transform.position + groundDetectionOffset + groundDetectionOffset_Forward, Vector2.down * groundDetectionRange);
+        Gizmos.DrawRay(rb.transform.position + groundDetectionOffset + groundDetectionOffset_Backward, Vector2.down * groundDetectionRange);
     }
 
 

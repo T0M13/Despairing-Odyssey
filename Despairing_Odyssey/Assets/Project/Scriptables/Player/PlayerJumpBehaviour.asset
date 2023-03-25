@@ -14,15 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 10
   maxJumps: 3
-  jumpsLeft: 3
+  jumpsLeft: 2
   isJumping: 0
   checkGrounded: 1
-  isGrounded: 1
-  isFalling: 0
+  isGrounded: 0
+  isFalling: 1
   groundDetectionRange: 0.28
   groundDetectionLayer:
     serializedVersion: 2
     m_Bits: 200
   groundDetectionOffset: {x: 0, y: 0.1, z: 0}
+  groundDetectionOffset_Left: {x: -0.15, y: 0, z: 0}
+  groundDetectionOffset_Right: {x: 0.15, y: 0, z: 0}
+  groundDetectionOffset_Forward: {x: 0, y: 0, z: 0.15}
+  groundDetectionOffset_Backward: {x: 0, y: 0, z: -0.15}
   jumpForceMode: 1
   jumpClip: {fileID: 7400000, guid: a20f34c7dcb56524aafb11a2bbc659aa, type: 2}
