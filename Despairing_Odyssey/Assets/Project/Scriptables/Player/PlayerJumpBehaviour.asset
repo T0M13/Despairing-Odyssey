@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8109bfeec72fa4ebd416d783ec8837, type: 3}
   m_Name: PlayerJumpBehaviour
   m_EditorClassIdentifier: 
-  jumpForce: 6
+  jumpForce: 10
   maxJumps: 3
   jumpsLeft: 3
   isJumping: 0
