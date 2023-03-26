@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 MoveInput { get => moveInput; set => moveInput = value; }
     public PlayerJumpComponent JumpBehaviour { get => jumpBehaviour; set => jumpBehaviour = value; }
     public Animator PlayerAnim { get => playerAnim; set => playerAnim = value; }
+    public Rigidbody PlayerRigidbody { get => playerRigidbody; set => playerRigidbody = value; }
 
     public event Action OnDeath;
 
@@ -164,13 +165,13 @@ public class PlayerController : MonoBehaviour
 
     private void CheckMovementMagnitude()
     {
-        moveBehaviour.ClampMovementMagnitude(playerRigidbody);
+        moveBehaviour.ClampMovementMagnitude(PlayerRigidbody);
     }
 
     private void CheckImpact()
     {
         if (!canHaveImpact) return;
-        if (playerRigidbody.velocity.y <= impactForce && JumpBehaviour.IsGrounded)
+        if (PlayerRigidbody.velocity.y <= impactForce && JumpBehaviour.IsGrounded)
         {
             RagdollOn();
         }
@@ -204,7 +205,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void GetRigidbody()
     {
-        playerRigidbody = GetComponent<Rigidbody>();
+        PlayerRigidbody = GetComponent<Rigidbody>();
     }
 
     /// <summary>
@@ -233,7 +234,7 @@ public class PlayerController : MonoBehaviour
 
     private void StepUp()
     {
-        moveBehaviour.StepUp(transform, playerRigidbody, StepRayLower, StepRayUpper);
+        moveBehaviour.StepUp(transform, PlayerRigidbody, StepRayLower, StepRayUpper);
     }
 
     /// <summary>
@@ -243,7 +244,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canMove)
         {
-            moveBehaviour.Move(transform, playerRigidbody, followTransform, MoveInput, lookBehaviour.angles);
+            moveBehaviour.Move(transform, PlayerRigidbody, followTransform, MoveInput, lookBehaviour.angles);
             if (MoveInput.x != 0 || MoveInput.y != 0)
             {
                 isMoving = true;
@@ -276,7 +277,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canJump)
         {
-            JumpBehaviour.JumpWithAnimation(playerRigidbody, jumpInput, PlayerAnim);
+            JumpBehaviour.JumpWithAnimation(PlayerRigidbody, jumpInput, PlayerAnim);
             jumpInput = 0;
         }
     }
@@ -346,9 +347,9 @@ public class PlayerController : MonoBehaviour
         PlayerAnim.enabled = true;
         IsRagdoll = false;
         canUseLogic = true;
-        playerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+        PlayerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         playerCollider.enabled = true;
-        playerRigidbody.isKinematic = false;
+        PlayerRigidbody.isKinematic = false;
 
         SwitchCameras();
     }
@@ -369,9 +370,9 @@ public class PlayerController : MonoBehaviour
         PlayerAnim.enabled = false;
         IsRagdoll = true;
         canUseLogic = false;
-        playerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+        PlayerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         playerCollider.enabled = false;
-        playerRigidbody.isKinematic = true;
+        PlayerRigidbody.isKinematic = true;
 
         SwitchCameras();
     }
@@ -531,7 +532,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        JumpBehaviour.DrawGizmos(playerRigidbody);
+        JumpBehaviour.DrawGizmos(PlayerRigidbody);
     }
 
 }

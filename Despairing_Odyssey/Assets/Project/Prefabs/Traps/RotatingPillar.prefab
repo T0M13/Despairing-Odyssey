@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 6933696918838687622}
   - component: {fileID: 6933696918838687621}
   - component: {fileID: 6933696918838687620}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Env_Pillar_Square_02 (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 6933696919009423925}
   - component: {fileID: 6933696919009423924}
   - component: {fileID: 6933696919009423923}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Env_Pillar_Square_02 (23)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -606,7 +606,6 @@ GameObject:
   - component: {fileID: 6933696919193445249}
   - component: {fileID: 6933696919192027799}
   - component: {fileID: 6980536987767241939}
-  - component: {fileID: 6980536987767241940}
   m_Layer: 7
   m_Name: RotatingPillars
   m_TagString: Untagged
@@ -706,21 +705,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 6e9c2527b7f8b3047bc6d28f6c769843, type: 3}
---- !u!114 &6980536987767241940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6933696919190370993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7bede1098de8eb43aae5207258f40c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 100
-  axis: {x: 0, y: 1, z: 0}
-  rotateClockwise: 1
 --- !u!1 &6933696919276155876
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,7 +717,7 @@ GameObject:
   - component: {fileID: 6933696919276155879}
   - component: {fileID: 6933696919276155878}
   - component: {fileID: 6933696919276155877}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Env_Pillar_Square_02 (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1140,16 +1124,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6933696919447133849}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 40.03003, y: 3.33, z: 38.87}
-  m_LocalScale: {x: 3.23, y: 3.230001, z: 3.230001}
+  m_LocalScale: {x: 3.23, y: 3.2300012, z: 3.2300012}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6933696919190078011}
   - {fileID: 6933696920102130680}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &6933696919471136249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,7 +1146,7 @@ GameObject:
   - component: {fileID: 6933696919471136252}
   - component: {fileID: 6933696919471136251}
   - component: {fileID: 6933696919471136250}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Env_Pillar_Square_02 (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1261,7 +1245,7 @@ GameObject:
   - component: {fileID: 6933696919604295796}
   - component: {fileID: 6933696919604295795}
   - component: {fileID: 6933696919604295794}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Env_Pillar_Square_02 (22)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1360,7 +1344,7 @@ GameObject:
   - component: {fileID: 6933696919648339720}
   - component: {fileID: 6933696919648339719}
   - component: {fileID: 6933696919648339718}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Env_Pillar_Square_02 (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1459,7 +1443,7 @@ GameObject:
   - component: {fileID: 6933696919721629104}
   - component: {fileID: 6933696919721629071}
   - component: {fileID: 6933696919721629070}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Env_Pillar_Square_02 (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1756,7 +1740,7 @@ GameObject:
   - component: {fileID: 6933696920039029356}
   - component: {fileID: 6933696920039029355}
   - component: {fileID: 6933696920039029354}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Env_Pillar_Square_02 (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2096,7 +2080,7 @@ GameObject:
   - component: {fileID: 6933696920432526097}
   - component: {fileID: 6933696920432526096}
   - component: {fileID: 6933696920432526319}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Env_Pillar_Square_02 (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2195,7 +2179,7 @@ GameObject:
   - component: {fileID: 6933696920517327004}
   - component: {fileID: 6933696920517327003}
   - component: {fileID: 6933696920517327002}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Env_Pillar_Square_02 (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2294,7 +2278,7 @@ GameObject:
   - component: {fileID: 6933696920687241643}
   - component: {fileID: 6933696920687241642}
   - component: {fileID: 6933696920687241641}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Env_Pillar_Square_02 (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2492,7 +2476,7 @@ GameObject:
   - component: {fileID: 6933696920743465566}
   - component: {fileID: 6933696920743465565}
   - component: {fileID: 6933696920743465564}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Env_Pillar_Square_02 (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
