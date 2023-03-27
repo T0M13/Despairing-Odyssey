@@ -29,6 +29,9 @@ public class PlayerJumpComponent : ScriptableObject, PlayerJumpBehaviour
     [SerializeField] AnimationClip jumpClip;
     private int jumpInput_A;
     private int fallingInput_A;
+    [Header("Other Settings")]
+    [SerializeField] bool showGizmos;
+
 
     public bool IsGrounded { get => isGrounded; set => isGrounded = value; }
 
@@ -36,22 +39,6 @@ public class PlayerJumpComponent : ScriptableObject, PlayerJumpBehaviour
     {
         jumpInput_A = Animator.StringToHash("isJumping");
         fallingInput_A = Animator.StringToHash("isFalling");
-    }
-    public void Jump(Rigidbody rb, float jumpInput)
-    {
-        //    if (checkGrounded)
-        //    {
-        //        if (IsPlayerGrounded(rb) && rb.velocity.y <= 0)
-        //        {
-        //            ResetJumps();
-        //        }
-        //    }
-
-        //    if (jumpInput == 1 && jumpsLeft > 0)
-        //    {
-        //        jumpsLeft -= 1;
-        //        rb.AddForce(Vector2.up * jumpForce, jumpForceMode);
-        //    }
     }
 
     public void JumpWithAnimation(Rigidbody rb, float jumpInput, Animator anim)
@@ -115,6 +102,7 @@ public class PlayerJumpComponent : ScriptableObject, PlayerJumpBehaviour
 
     public void DrawGizmos(Rigidbody rb)
     {
+        if (!showGizmos) return;
         Gizmos.color = Color.green;
         Gizmos.DrawRay(rb.transform.position + groundDetectionOffset, Vector2.down * groundDetectionRange);
         Gizmos.DrawRay(rb.transform.position + groundDetectionOffset + groundDetectionOffset_Left, Vector2.down * groundDetectionRange);

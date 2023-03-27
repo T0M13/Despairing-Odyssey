@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PlayerJumpBehaviour
   m_EditorClassIdentifier: 
   jumpForce: 7
-  maxJumps: 3
-  jumpsLeft: 3
+  maxJumps: 2
+  jumpsLeft: 2
   isJumping: 0
   checkGrounded: 1
   isGrounded: 1
@@ -30,3 +30,4 @@ MonoBehaviour:
   groundDetectionOffset_Backward: {x: 0, y: 0, z: -0.15}
   jumpForceMode: 1
   jumpClip: {fileID: 7400000, guid: a20f34c7dcb56524aafb11a2bbc659aa, type: 2}
+  showGizmos: 0
