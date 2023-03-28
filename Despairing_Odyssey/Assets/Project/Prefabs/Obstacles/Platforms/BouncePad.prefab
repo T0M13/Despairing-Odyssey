@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4015399203302101175}
   - component: {fileID: 3989430681245762963}
   - component: {fileID: 4015399203302101174}
-  - component: {fileID: 1546546809}
+  - component: {fileID: 6292530227914908881}
   m_Layer: 7
   m_Name: BouncePad
   m_TagString: Untagged
@@ -114,10 +114,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceVelocity: 15
-  bounceThreshold: -5
+  bounceThreshold: 0
   bounceDirection: {x: 0, y: 1, z: 0}
---- !u!135 &1546546809
-SphereCollider:
+--- !u!64 &6292530227914908881
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -126,6 +126,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.36142433
-  m_Center: {x: 0, y: 0.38, z: 0}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 0041361d92246e649950812834635a46, type: 3}
