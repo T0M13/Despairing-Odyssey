@@ -14,7 +14,7 @@ public class SawRailTrap : MonoBehaviour
     [SerializeField] private AnimationCurve railCurve;
     [Header("SawRail Speed")]
     [SerializeField] private float sawRailSpeed = 1f;
-    [SerializeField] private float sawSpeed = 1000f;
+    [SerializeField] private float sawSpeed = 1f;
     [Header("Timer")]
     [SerializeField] private float timer;
     [Header("Randomize Time")]
@@ -28,7 +28,9 @@ public class SawRailTrap : MonoBehaviour
         sawRailCollider = GetComponent<Collider>();
 
         GameObject sawClone = Instantiate(sawPrefab, transform.position, transform.rotation);
-        sawClone.GetComponent<Saw>().sawSpeed = sawSpeed;
+        sawClone.GetComponent<Saw>().SawSpeed = sawSpeed;
+        sawClone.GetComponent<Saw>().SetSpeed();
+
         saw = sawClone;
 
         StartCoroutine(InitiateSawRail());

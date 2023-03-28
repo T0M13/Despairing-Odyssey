@@ -176,7 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2cd1194a25ef324bbbfa9526a6b6ad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sawPrefab: {fileID: 24580122802161852, guid: 91cfb4b9ba55ef445b19f5074e3086d2, type: 3}
+  sawPrefab: {fileID: 4785314352478318251, guid: 47e5b846cd6f8954dbce12be172f9728,
+    type: 3}
   saw: {fileID: 0}
   sawRailCollider: {fileID: 2587790974815547987}
   sawRailLeftLimitTransform: {fileID: 1755469774}
@@ -207,7 +208,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   sawRailSpeed: 1
-  sawSpeed: 1000
+  sawSpeed: 5
   timer: 1
   initiateTime: 2
   randomize: 0

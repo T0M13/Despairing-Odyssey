@@ -4,18 +4,48 @@ using UnityEngine;
 
 public class Saw : MonoBehaviour
 {
-    public float sawSpeed = 1000f;
+
+    [SerializeField] Animator animator;
+    [SerializeField] float sawSpeed = 1f;
+
+    //private const string sawAnimationName = "Rotate_Saw";
+
+    public float SawSpeed { get => sawSpeed; set => sawSpeed = value; }
+
+    private void Awake()
+    {
+        GetAnimator();
+    }
 
     private void Start()
     {
+        //Audio
         if (AudioManager.instance)
             AudioManager.instance.PlayOnObject("saw", gameObject);
+
+        //Rotate
+        if (animator)
+        {
+            SetSpeed();
+        }
     }
 
-    private void Update()
+    private void OnValidate()
     {
-        transform.Rotate(new Vector3(transform.rotation.x + 1 * sawSpeed * Time.deltaTime, transform.rotation.y, 0));
+        GetAnimator();
+        SetSpeed();
     }
 
+
+    private void GetAnimator()
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
+
+    public void SetSpeed()
+    {
+
+        animator.speed = SawSpeed;
+    }
 
 }
