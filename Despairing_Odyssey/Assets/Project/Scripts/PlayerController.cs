@@ -519,6 +519,15 @@ public class PlayerController : MonoBehaviour
         UpdateInventory();
     }
 
+    public void ResetPlayer()
+    {
+        GetRagdoll();
+        RagdollOff();
+        ReviveWithPosition(startPosition, false);
+        InitiateInventory();
+
+    }
+
     private void UpdateLastPosition()
     {
         if (IsDead || !JumpBehaviour.IsGrounded) return;

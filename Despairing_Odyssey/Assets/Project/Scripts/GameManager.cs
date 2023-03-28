@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] private string timerText;
+    [SerializeField] private float time;
     [SerializeField] private float startTime;
     [SerializeField] private bool timerIsRunning = false;
     [SerializeField] private float timeScale = 1f;
@@ -84,11 +85,11 @@ public class GameManager : MonoBehaviour
         if (isGameOver) return;
         if (timerIsRunning)
         {
-            float t = Time.time - startTime;
+             time = Time.time - startTime;
 
-            string hours = ((int)t / 3600).ToString("00");
-            string minutes = ((int)t / 60).ToString("00");
-            string seconds = (t % 60).ToString("00");
+            string hours = ((int)time / 3600).ToString("00");
+            string minutes = ((int)time / 60).ToString("00");
+            string seconds = (time % 60).ToString("00");
 
             timerText = hours + ":" + minutes + ":" + seconds;
         }
@@ -115,14 +116,16 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         //Count Deaths and Time until player closes game
-        //isGameOver = true;
+        //SaveGame
+        isGameOver = true;
+        ResetGame();
     }
 
-    //public void ResetGame()
-    //{
-    //    isGameOver = false;
-    //    StartTimer();
-    //}
+    public void ResetGame()
+    {
+        isGameOver = false;
+        PlayerController.instance.ResetPlayer();
+    }
 
 
 }

@@ -45,6 +45,7 @@ public class PlayerMoveComponent : ScriptableObject, PlayerMoveBehaviour
         followTransform.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
 
         velocity = (playerTransform.forward * moveInput.y * moveSpeed) + (playerTransform.right * moveInput.x * moveSpeed) + (playerTransform.up * playerRigid.velocity.y);
+
         playerRigid.velocity = velocity;
 
 
