@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985aaebc69808a54eb64b403ae7571dd, type: 3}
   m_Name: PlayerMoveBehaviour
   m_EditorClassIdentifier: 
-  nextPosition: {x: 19.015339, y: 2.3817947, z: 34.895683}
-  moveSpeed: 700
+  nextPosition: {x: 31.75353, y: -0.011060238, z: 34.265644}
+  moveSpeed: 1000
   maxMagnitude: 5000
   hasMaxMagnitude: 0
   velocity: {x: 0, y: 0, z: 0}

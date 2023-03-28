@@ -4,115 +4,57 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    Rigidbody rb = null;
+    [SerializeField] private bool counterclockwise;
+    [SerializeField] private float speed;
+    [SerializeField] private Vector3 rotationAxis = Vector3.up; // default axis of rotation
+    private PlayerController player;
+    private Rigidbody rb;
 
-    [SerializeField] bool rotateEnabled = true;
-    [SerializeField] float rotationSpeed = 20.0f;
-
-    [SerializeField] bool moveEnabled = true;
-    [SerializeField] float moveSpeed = 1.0f;
-    Vector3 startPosition = Vector3.zero;
-    Vector3 endPosition = Vector3.zero;
-
-    Vector3 platformPositionLastFrame = Vector3.zero;
-    float timeScale = 0.0f;
-
-    Dictionary<Rigidbody, float> RBsOnPlatformAndTime = new Dictionary<Rigidbody, float>();
-    [SerializeField] List<Rigidbody> RBsOnPlatform = new List<Rigidbody>();
-
-    private void Awake()
+    private void Start()
     {
+        ChangeDirection();
         rb = GetComponent<Rigidbody>();
-
-        startPosition = rb.position;
-        endPosition = new Vector3(startPosition.x + 3.0f, startPosition.y + 3.0f, startPosition.z);
-
+        rb.angularVelocity = rotationAxis * speed * (counterclockwise ? -1f : 1f);
     }
 
-    private void FixedUpdate()
+    private void OnValidate()
     {
-        if (rotateEnabled)
-        {
-            rb.rotation = Quaternion.Euler(rb.rotation.eulerAngles.x,
-                rb.rotation.eulerAngles.y + rotationSpeed,
-                rb.rotation.eulerAngles.z);
-
-        }
-
-        if (RBsOnPlatform.Count != RBsOnPlatformAndTime.Count)
-        {
-            RBsOnPlatformAndTime.Clear();
-            foreach (Rigidbody rigid in RBsOnPlatform)
-            {
-                RBsOnPlatformAndTime.Add(rigid, 1.0f);
-
-            }
-        }
-
-        if (moveEnabled)
-        {
-            platformPositionLastFrame = rb.position;
-            timeScale = moveSpeed / Vector3.Distance(startPosition, endPosition);
-            rb.position = Vector3.Lerp(endPosition, startPosition, Mathf.Abs(Time.time * timeScale % 2 - 1));
-        }
-
-        foreach (Rigidbody rigid in RBsOnPlatform)
-        {
-            RBsOnPlatformAndTime.TryGetValue(rigid, out float timer);
-            if (timer < 1.0f)
-            {
-                RBsOnPlatformAndTime[rigid] += Time.deltaTime * 4.0f;
-            }
-            else if (timer > 1.0f)
-            {
-                RBsOnPlatformAndTime[rigid] = 1.0f;
-            }
-            RotateAndMoveRBOnPlatform(rigid, timer);
-        }
+        ChangeDirection();
     }
 
-    private void RotateAndMoveRBOnPlatform(Rigidbody rigid, float timer)
+    private void ChangeDirection()
     {
-        if (rotateEnabled)
-        {
-            float rotationAmount = rotationSpeed * timer * Time.deltaTime;
-
-            Quaternion localAngleAxis = Quaternion.AngleAxis(rotationAmount, rb.transform.up);
-            rigid.position = (localAngleAxis * (rigid.position - rb.position)) + rb.position;
-
-            Quaternion globalAngleAxis = Quaternion.AngleAxis(rotationAmount, rigid.transform.InverseTransformDirection(rb.transform.up));
-            rigid.rotation *= globalAngleAxis;
-
-        }
-
-        if (moveEnabled)
-        {
-            rigid.position += (rb.position - platformPositionLastFrame) * timer;
-        }
+        speed = Mathf.Abs(speed) * (counterclockwise ? -1f : 1f);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if (!(other.attachedRigidbody == null) && !(other.attachedRigidbody.isKinematic))
+        if (player == null) return;
+        if (player.IsRagdoll || (player.IsRagdoll && player.IsDead))
         {
-            if (!(RBsOnPlatform.Contains(other.attachedRigidbody)))
-            {
-                RBsOnPlatform.Add(other.attachedRigidbody);
-                RBsOnPlatformAndTime.Add(other.attachedRigidbody, 0.0f);
-            }
+            Unparent(player.transform);
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.GetComponent<PlayerController>())
+        {
+            player = other.gameObject.GetComponent<PlayerController>();
+            player.transform.parent = transform;
+        }
+    }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!(other.attachedRigidbody == null))
+        if (other.gameObject.GetComponent<PlayerController>())
         {
-            if (RBsOnPlatform.Contains(other.attachedRigidbody))
-            {
-                RBsOnPlatform.Remove(other.attachedRigidbody);
-                RBsOnPlatformAndTime.Remove(other.attachedRigidbody);
-            }
+            Unparent(other.gameObject.transform);
         }
+    }
+
+    private void Unparent(Transform transform)
+    {
+        transform.parent = null;
     }
 }
