@@ -393,11 +393,11 @@ public class PlayerController : MonoBehaviour
         RagdollOn();
         if (HasHealthPoints())
         {
-            StartCoroutine(ReviveWithTime(InventoryItemType.HealthPoint, 1, lastPosition, true));
+            StartCoroutine(ReviveWithTimeAndItem(InventoryItemType.HealthPoint, 1, lastPosition, true));
         }
         else if (savedPositionSaved)
         {
-            StartCoroutine(ReviveWithTime(InventoryItemType.SaveItem, 1, savedPosition, false));
+            StartCoroutine(ReviveWithTimeAndItem(InventoryItemType.SaveItem, 1, savedPosition, false));
         }
         else
         {
@@ -406,13 +406,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public IEnumerator ReviveWithTime(InventoryItemType itemType, int amount, Vector3 position, bool withHealthItem)
+    public IEnumerator ReviveWithTimeAndItem(InventoryItemType itemType, int amount, Vector3 position, bool withHealthItem)
     {
         yield return new WaitForSeconds(reviveTime);
         if (withHealthItem)
             ReviveWithItem(itemType, amount, position);
         else
             ReviveWithPosition(position, true);
+    }
+
+    public IEnumerator ReviveWithTime(Vector3 position)
+    {
+        yield return new WaitForSeconds(reviveTime);
+        ReviveWithPosition(position, false);
     }
 
     public void Revive()
@@ -522,8 +528,7 @@ public class PlayerController : MonoBehaviour
     public void ResetPlayer()
     {
         GetRagdoll();
-        RagdollOff();
-        ReviveWithPosition(startPosition, false);
+        StartCoroutine(ReviveWithTime(startPosition));
         InitiateInventory();
 
     }
